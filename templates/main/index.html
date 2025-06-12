@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load my_tags %}
+{% block content %}
+
+<!-- центральна секція -->
+<section class="col l6 s12 main_section">
+	<div class="row main_section_row" >
+
+	 	<form class="col s12" action="{% url  'minus-search' %}" method="GET">
+      		<div class="row main_search__row">
+        		<div class="input-field col s12 main_search">
+					<lord-icon
+							class="search_icon"
+							src="https://cdn.lordicon.com/msoeawqm.json"
+							trigger="loop"
+							delay="300"
+							colors="primary:#6baf00,secondary:#6baf00"
+							stroke="100"
+							style="width:30px;height:30px">
+					</lord-icon>
+          			<input id="icon_prefix" name="search" type="text" class="validate ">
+          			<label for="icon_prefix" class="icon_prefix">Пошук мінусовок</label>
+        		</div>
+
+      		</div>
+    	</form>
+		{% letters %}
+
+		<div class="main_new col s12 l11 offset-l1">
+			{% autoescape off %}{% main_banner %}{% endautoescape %}
+			<!-- <span>Банер-кнопка.Важлива новина</span> -->
+
+		</div>
+		{% if user.is_authenticated%}
+			{% if user.is_staff %}
+				<div class="col s12 l9 main_btn offset-l4" id="addNewBtn">
+					<div class="row">
+						<a class="waves-effect waves-light btn-large col s6 " href="{% url 'add_new' %}"><i class="material-icons right" style="color:red;">add</i>Додати новину</a>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+		<div class="all_news col s12 l11 offset-l1">
+			<div class="row news__row" >
+			{% for new in news %}
+				<div class="new col s12 news__item" >
+					<div class="row" >
+
+						<div class="new_caption col s12">
+							<h2>{{ new.title }}</h2>
+						</div>
+						<div class="new_text col s12">
+							<p>{% if new.preview %}{{ new.preview }}... <br><a href="{% url 'news_index' pk=new.id %}" class="read_next">  Читати далі</a> {% else %}{{ new.body }}{% endif %}</p>
+							<br>
+						</div>
+						<div class="authors_and_button col s12">
+							<div class="row">
+<!-- 	data-position="bottom" data-tooltip="" -->
+								<a class="waves-effect waves-light btn-large col s9" href="{% url 'user_page' pk=new.user.id %}"><i class="material-icons left">perm_identity</i>{{ new.user.first_name }} {{ new.user.last_name }}, {{ new.pub_date }}}</a>
+								{% if new.allow_comments %}
+									<a class="news__comment__btn waves-effect waves-light btn-large col s3 comments" id="{{ new.id }}"  ><i class="material-icons left">comment</i>{{ new.comments_count }}</a>
+								{% endif %}
+								<!-- <span id="k" style="display: none;"></span> -->
+							</div>
+						</div>
+					</div>
+					<div class="comment__row hide">
+						<div class="comment__item">
+							<a class="comment__avatar-box" >
+								<img src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+									 alt="avatar" class="comment__avatar" style="width: 60px; height: 60px">
+
+							</a>
+							<div class="comment__content">
+								<a  class="comment__user-name">
+									Name Name
+									<span class="comment__controller-edit-status">Відредаговано!</span>
+								</a>
+								<div class="comment__info">
+									<p class="comment__info-date">
+										date 13 23 3003
+									</p>
+									<p class="comment__info-rating">
+										Рейтинг +1
+									</p>
+									<div class="comment__info-reactions">
+										<a class="comment__info-dislike">
+											<svg class="comment__info-dislike-icon comment__info-reaction-icon" viewBox="0 0 24 24" fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<g clip-path="url(#clip0_15_129)">
+													<rect width="24" height="24" />
+													<path d="M22 11.5C22 12.6046 21.1046 13.5 20 13.5L19 13.5C17.8954 13.5 17 12.6046 17 11.5L17 5.5C17 4.39543 17.8954 3.5 19 3.5L20 3.5C21.1046 3.5 22 4.39543 22 5.5L22 11.5Z"
+														  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M17 11.5C16 11.5 12 14 12 19C12 21 9 21 9 19C9 17 9 16 10 13.5L4 13.5C3.44772 13.5 3 13.0523 3 12.5L3 9.26039C3 8.77056 3.17976 8.29776 3.50518 7.93166L6.40331 4.67126C6.78285 4.24428 7.32686 3.99998 7.89813 3.99998L14.6667 3.99998C14.883 3.99998 15.0936 4.07016 15.2667 4.19998L17 5.49998"
+														  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_15_129">
+														<rect width="24" height="24" />
+													</clipPath>
+												</defs>
+											</svg>
+
+										</a>
+										<a class="comment__info-like" href="">
+											<svg class="comment__info-like-icon  comment__info-reaction-icon comment_like_active" viewBox="0 0 24 24" fill="none"
+												 xmlns="http://www.w3.org/2000/svg">
+												<g clip-path="url(#clip0_15_121)">
+													<rect width="24" height="24" />
+													<path d="M3 12.5C3 11.3954 3.89543 10.5 5 10.5H6C7.10457 10.5 8 11.3954 8 12.5V18.5C8 19.6046 7.10457 20.5 6 20.5H5C3.89543 20.5 3 19.6046 3 18.5V12.5Z"
+														  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+													<path d="M8 12.5C9 12.5 13 10 13 5C13 3 16 3 16 5C16 7 16 8 15 10.5H21C21.5523 10.5 22 10.9477 22 11.5V14.7396C22 15.2294 21.8202 15.7022 21.4948 16.0683L18.5967 19.3287C18.2172 19.7557 17.6731 20 17.1019 20H10.3333C10.117 20 9.90643 19.9298 9.73333 19.8L8 18.5"
+														  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+												</g>
+												<defs>
+													<clipPath id="clip0_15_121">
+														<rect width="24" height="24" />
+													</clipPath>
+												</defs>
+											</svg>
+
+
+										</a>
+
+
+									</div>
+
+								</div>
+								<form action="#" class="comment__controller__form">
+									<p class="comment">
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam asperiores at cupiditate dicta distinctio iste nobis nulla sapiente suscipit ullam? Ab alias dolor illum, in ipsam labore minus possimus sint!
+									</p>
+									<textarea name="comment" type="text" class="comment__edit comment__hide" id="comment">
+
+							</textarea>
+
+
+									<div class="comment__controller">
+										<a class="comment__controller-reply" >Відповісти</a>
+										<div class="comment__controller-edit_box">
+											<div class="comment__controller-cancel-edit comment__hide">
+												Скасувати
+											</div>
+											<p class="comment__controller-edit" >
+												Редагувати
+											</p>
+											<button type="submit" class="comment__controller-save comment__hide" >
+												Зберегти
+											</button>
+										</div>
+
+									</div>
+								</form>
+
+								<form action="#" class="comment__form__reply comment__hide">
+							<textarea name="comment__reply__input" type="text" class="comment__reply_area-text">
+
+							</textarea>
+									<div class="comment__form__reply__controller">
+										<div class="comment__reply_cancel-btn">
+											Скасувати
+										</div>
+										<button class="comment__reply_save-btn" type="submit">Відправити</button>
+
+									</div>
+
+								</form>
+
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			{% endfor %}
+			<div class="pagination">
+				<span class="step-links">
+						{% if news.has_previous %}
+							<a href="?page={{ news.previous_page_number }}">Попередня сторінка</a>
+						{% endif %}
+						<span class="current">
+								Сторінка {{ news.number }} з {{ news.paginator.num_pages }}.
+						</span>
+						{% if news.has_next %}
+							<a href="?page={{ news.next_page_number }}">Наступна сторінка</a>
+						{% endif %}
+				</span>
+			</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="/static/js/commentNews.js"></script>
+</section>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

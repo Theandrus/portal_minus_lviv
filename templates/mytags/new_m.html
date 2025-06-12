@@ -1,0 +1,11 @@
+{% load static %}
+{% for n_m in new_m %}
+	<div>
+
+			<a href="{% url 'minus' pk=n_m.minus.id %}" style="color:#9ACD32;"><h6>{{ n_m.title }}</h6></a>
+
+					<a class="waves-effect waves-light btn-small " href="{% url 'if_minus_correct' pk=n_m.minus.pk %}" id="like">Перевірити якість оформлення</a>
+
+
+	</div>
+{% endfor %}

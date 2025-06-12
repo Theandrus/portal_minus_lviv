@@ -1,0 +1,9 @@
+
+{% for l_c in comments %}
+<div class="minus_item">
+    <div>
+        <p style="color:#6baf00;font-weight:bold;">{{ l_c.user.username }}: </p>
+        <span>{{ l_c.comment|safe }}</span><br>
+    </div>
+</div>
+{% endfor %}

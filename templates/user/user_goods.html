@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<form class="col s12" action="{% url  'minus-search' %}" method="GET">
+      		<div class="row">
+        		<div class="input-field col s12">
+          			<i class="material-icons prefix">search</i>
+          			<input id="icon_prefix" name="search" type="text" class="validate">
+          			<label for="icon_prefix">Пошук мінусовок</label>
+        		</div>
+
+      		</div>
+    	</form>
+
+
+      <div id="test1" class="col s12 m11 offset-m1">
+        <div class="row">
+					<h2>{% if z %} Ваші товари {% else %} Товари користувача {% endif %}</h2>
+      {% for g in blurbs %}
+        <div class="card col s12 goods" >
+          <div class="card-image waves-effect waves-block waves-light">
+            <a href="{% url 'goods' pk=g.id %}">
+              <img class="activator responsive-img" src="/static/{{ g.photo }}">
+            </a>
+          </div>
+          <div class="card-content">
+
+            <span class="card-title activator grey-text text-darken-4">{{ g.title|safe|truncatechars:25  }}<i class="material-icons right">more_vert</i></span>
+            <!-- <p><a href="{% url 'goods' pk=g.pk %}">This is a link</a></p> -->
+
+          </div>
+          <div class="card-reveal">	<a href="{% url 'goods' pk=g.id %}">
+            <span class="card-title grey-text text-darken-4">{{ g.title }}<i class="material-icons right">close</i></span>
+            <p>{{ g.description }}</p></a>
+          </div>
+        </div>
+        {% endfor %}
+				<div class="pagination" style="text-align:center;">
+					<span class="step-links">
+							{% if blurbs.has_previous %}
+								<a href="?page={{ blurbs.previous_page_number }}">Попередня сторінка</a>
+							{% endif %}
+							<span class="current">
+									Сторінка {{ blurbs.number }} з {{ blurbs.paginator.num_pages }}.
+							</span>
+							{% if blurbs.has_next %}
+								<a href="?page={{blurbs.next_page_number }}">Наступна сторінка</a>
+							{% endif %}
+					</span>
+				</div>
+        </div>
+
+      </div>
+{% if selected_blurbs %}
+			<div id="test1" class="col s12 m11 offset-m1">
+				<div class="row">
+					<h2>Обрані товари</h2>
+			{% for g in selected_blurbs %}
+				<div class="card col s12 goods" >
+					<div class="card-image waves-effect waves-block waves-light">
+						<a href="{% url 'goods' pk=g.blurb.id %}">
+							<img class="activator responsive-img" src="/static/{{ g.photo }}">
+						</a>
+					</div>
+					<div class="card-content">
+
+						<span class="card-title activator grey-text text-darken-4">{{ g.blurb.title|safe|truncatechars:25  }}<i class="material-icons right">more_vert</i></span>
+						<p><a href="{% url 'delete-selected-blurbs' pk=g.id %}">Видалити з обраних</a></p>
+
+					</div>
+					<div class="card-reveal">	<a href="{% url 'goods' pk=g.id %}">
+						<span class="card-title grey-text text-darken-4">{{ g.blurb.title }}<i class="material-icons right">close</i></span>
+						<p>{{ g.blurb.description }}</p></a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+		{% endif %}
+
+			</div>
+
+</section>
+
+
+{% endblock %}

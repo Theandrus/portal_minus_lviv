@@ -1,0 +1,11 @@
+				    	{% for f in forum %}
+							<div class="minus_item">
+								<a href="http://minus.lviv.ua/forum/thread/{{ f.thread_id }}/">
+								<p style="color:black;color:#6baf00;">{{ f.thread_text }}</p>
+
+								<p style="color: #FFFFFF"> {% if  f.author.first_name or f.author.last_name %} {{ f.author.first_name }} {{ f.author.last_name }}: {% else %} {{ f.author.username }} {% endif %} </p>
+								<span style="color:#838383; font-weight: 400">{{ f.body|striptags }}</span><br>
+                                </a>
+							</div>
+
+				    	{% endfor %}

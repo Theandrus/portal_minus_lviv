@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<div class="header col s12 m10 offset-m1">
+			<div class="row">
+						<form class="col s11 offset-s1 reg" method="POST">
+							{% csrf_token %}
+							<h2>Перевірити мінусовку</h2>
+
+							<label for="minus">Заголовок</label>
+							<input type="text" name="minus" value="{{ minus.title }}" ><br>
+							<label for="author">Виконавець</label>
+							<input type="text" name="author" value="{{ minus.author.name }}">
+							 <div class="input-field col s12">
+						    <select multiple>
+						      <option value="" disabled selected>Тип</option>
+						      <option value="1">Option 1</option>
+						      <option value="2">Option 2</option>
+						      <option value="3">Option 3</option>
+						    </select>
+
+						  </div>
+						  <div class="input-field col s12">
+						    <select multiple>
+						      <option value="" disabled selected>Жанр</option>
+						      <option value="1">Option 1</option>
+						      <option value="2">Option 2</option>
+						      <option value="3">Option 3</option>
+						    </select>
+
+						  </div>
+							  <div class="input-field col s12">
+						    <select multiple>
+						      <option value="" disabled selected>Вид</option>
+						      <option value="1">Option 1</option>
+						      <option value="2">Option 2</option>
+						      <option value="3">Option 3</option>
+						    </select>
+
+						  </div>
+
+
+						<div class="col s11">
+							<laber>Тематика</label>
+							<input type="text" value="{% if minus.thematics%} {{ minus.thematics }} {% else %} Немає тематики {% endif %}">
+						</div>
+						<div class="col s6"><p>Плюсовка</p></div>
+						<div class="col s6"><p>{% if minus.plusrecord %} Так {% else %} Ні {% endif %}</p></div>
+						<div class="col s6"><p>Категорія:</p></div>
+						<div class="col s6"><p>{% if category %} {{ category.name }} {% else %} Немає категорії {% endif %}</p></div>
+						<div class="col s6"><p>Текст пісні </p></div>
+						<div class="col s6"><p>{% if minus.lyrics %} {{ minus.lyrics }} {% else %} Немає тексту пісні {% endif %}</p></div>
+
+						  <button type="submit" class="sbm_auth waves-effect waves-light btn-large col s12">Посаржитиcь на оформлення</button>
+
+						</form>
+			</div>
+		</div>
+
+
+	</div>
+</section>
+
+{% endblock %}

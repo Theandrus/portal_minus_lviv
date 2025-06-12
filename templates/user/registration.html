@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<form class="col s12 m10 offset-m1 reg" action="{% url 'registration_page' %}" method="POST">
+			{% csrf_token %}
+			<h2 style="color:#9ACD32;">Зареєструйтесь</h2>
+			{{ form }}
+
+			<button style="margin-top: 20px" type="submit" class="sbm_auth waves-effect waves-light btn-large col s12">Увійти</button>
+
+		</form>
+
+	</div>
+</section>
+{% endblock %}

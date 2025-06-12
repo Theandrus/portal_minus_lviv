@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load my_tags %}
+<!-- центральна секція -->
+<section class="col l6 s12">
+	<div class="row ">
+<!-- 		<div class="main_btn col s11 offset-s1">
+		  <div class="row">
+			<a class="waves-effect waves-light btn-large col s6" href="{% url 'add_minus' %}"><i class="material-icons left">file_download</i>Завантажити мінусовку</a>
+			<a class="waves-effect waves-light btn-large col s6"><i class="material-icons right">star</i>Статут та правила порталу</a>
+		  </div>
+		</div> -->
+		<form class="col s12" action="{% url  'minus-search' %}" method="GET">
+      		<div class="row ">
+        		<div class="input-field col s12">
+          			<i class="material-icons prefix">search</i>
+          			<input id="icon_prefix" name="search" type="text" class="validate">
+          			<label for="icon_prefix">Пошук мінусовок</label>
+        		</div>
+
+      		</div>
+    	</form>
+
+
+		<div class="all_news col s11 offset-s1">
+			<div class="row">
+			<div class="new col s12">
+					<div class="row">
+
+						<div class="new_caption col s12">
+							<h2>{{ news.title }}</h2>
+						</div>
+						<div class="new_text col s12">
+							<p>{{ news.preview }}<br>{{ news.body }}</p>
+							{%  if news.img %}
+								<p><img src="/{{ news.img }}" alt="Помилка завантаження зображення" class="materialboxed"></p>
+							{% endif %}
+						</div>
+						<div class="authors_and_button col s12">
+							<div class="row">
+<!-- 	data-position="bottom" data-tooltip="" -->
+								<a class="waves-effect waves-light btn-large  " ><i class="material-icons left">perm_identity</i>{{ news.user.first_name }} {{ news.user.last_name }}, {{ news.pub_date }}}</a>
+
+							</div>
+						</div>
+					</div>
+			</div>
+			{% if news.allow_comments %}
+			<div class="col s12 comments_in_minusstore">
+					<p>Коментарі({{ count }}):</p>
+					{% for c in news.comments %}
+					<div class="comment col s12">
+						<div class="avatar_mini col s2">
+							<a href="{% url 'user_page' pk=c.user.id%}">
+								<img src="/{% avatar pk=c.user.id %}"  class="responsive-img" alt="">
+							</a>
+						</div>
+						<p style="font-weight: bold;"><a href="{% url 'user_page' pk=c.user.id%}" style="color:#6baf00;">{% if c.user.first_name %} {{ c.user.first_name }} {{ c.user.last_name }}{% else %}{{ c.user.username }}{% endif %}</a></p>
+						<p style="font-size:1em;">{{ c.comment }}</p>
+						<div class="social_btn">
+						{% if request.user.is_authenticated %}
+							<a class="waves-effect waves-light btn-large likeC" id="{{ c.id }}"><i class="material-icons left">mood</i><span>
+							{{ c.likes }} </span><span style="display:none;" id="userl">{{ request.user.id }}</span></a>
+							<a class="waves-effect waves-light btn-large dislikeC" id="{{ c.id }}"><i class="material-icons left">mood_bad</i><span>
+							{{ c.dislikes }}</span></a>
+
+						{% else %}
+							<a class="waves-effect waves-light btn-large likeC"><i class="material-icons left">mood</i><span>
+							{{ c.likes }} </span><span style="display:none;" id="userl">{{ request.user.id }}</span></a>
+							<a class="waves-effect waves-light btn-large dislikeC" ><i class="material-icons left">mood_bad</i><span>
+							{{ c.dislikes }} </span></a>
+						{% endif %}
+						</div>
+						<a class="waves-effect waves-light btn-small answer" href="#comment_form" comment_id="{{ c.id }}"  username="{{ c.user.username }}" style="float:right;color:#6baf00;background-color:#fff;">Відповісти</a>
+						{% for a in c.answer %}
+
+							<div class="comment col s10 offset-s2">
+								<div class="avatar_mini col s2">
+									<a href="{% url 'user_page' pk=a.user.id%}">
+										<img src="/{% avatar pk=a.user.id %}"  class="responsive-img" alt="">
+									</a>
+								</div>
+								<p style="font-weight: bold;"><a href="{% url 'user_page' pk=a.user.id%}" style="color:#6baf00;">{% if a.user.first_name %} {{ a.user.first_name }} {{ a.user.last_name }}{% else %}{{ a.user.username }}{% endif %}</a></p>
+								<p style="font-size:1em;">{{ a.comment }}</p>
+							</div>
+						{% endfor %}
+					</div>
+					{% endfor %}
+					{% if request.user.is_authenticated %}
+					<div class="add_comment"  name="comment_form">
+						<form  method="POST">
+							{% csrf_token %}
+							{{ add_comment_form.as_p }}
+								<button type="submit" id="comment_form" class="waves-effect waves-light btn-small">
+									Відправити
+								</button>
+
+      								<label>
+        								<input type="checkbox" name="subscribe"  />
+        								<span>Підписатись на коментарі до цієї новини</span>
+      								</label>
+
+						</form>
+
+					</div>
+
+					{% endif %}
+				</div>
+
+			{% else %}
+
+			<h6 align="center">До цього поста коментарi недоступнi</h6>
+
+
+			{% endif %}
+			</div>
+		</div>
+
+	</div>
+</section>
+
+{% endblock %}

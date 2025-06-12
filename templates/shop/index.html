@@ -1,0 +1,228 @@
+{% extends 'base_2.html' %}
+{% load my_tags %}
+{% block content %}
+<section class="col s12 m10 offset-m1">
+	<div class="row">
+		<div class="marketing col s12">
+			{% autoescape off %}{% main_banner %}{% endautoescape %}
+		</div>
+		<div class="buy_and_selling col s12">
+			<div class="row">
+				<a class="waves-effect waves-light btn-large col s4" href="{% url 'add_blurb' %}"><i class="material-icons left">add</i>Додати оголошення</a>
+				<span class="col s4">Куплю/Продам</span>
+				<a class="waves-effect waves-light btn-large col s4"><i class="material-icons right">done</i>Правила розміщення оголошень</a>
+			</div>
+		</div>
+		<!-- <div class="col s12 shops">
+			<h1>Корпорації рекомендовані порталом</h1>
+			<div class="row">
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round ">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+			<div class="btn-floating btn-large waves-effect waves-light col s1 div_round">Вільно</div>
+
+			</div> -->
+		</div>
+		<div class="forms_search">
+			<div class="row">
+				<form  class="col s12">
+					 <div class="row">
+        				<div class="input-field col s4">
+          				<i class="material-icons prefix">search</i>
+          					<textarea id="icon_prefix2" class="materialize-textarea "></textarea>
+          					<label for="icon_prefix2">Пошук</label>
+
+       					 </div>
+						<div class="input-field col s4 select_region">
+						    <select>
+						      <option value="" disabled selected>Виберіть бажаний регіон</option>
+									{% for region in georegion %}
+										<option value="{{ region.id }}">{{ region.title }}</option>
+									{% endfor %}
+						    </select>
+
+						</div>
+						 <div class="input-field col s4 select_region">
+						    <select >
+						      <option value="" disabled selected>Виберіть категорію</option>
+						   	  <optgroup label="Звукове обладнання">
+						      	<option value="1">Акустичні системи</option>
+						      	<option value="2">Підсилювачі</option>
+						      	<option value="3">Мікшерні пульти</option>
+						      	<option value="4">Мікрофони</option>
+						      	<option value="5">Прилади обробки звуку</option>
+						      	<option value="6">Стійки,реки,чохли</option>
+						      	<option value="7">Комутація</option>
+						      	<option value="8">Інше звукове начиння</option>
+						      </optgroup>
+						       <optgroup label="Світлове обладнання">
+						      	<option value="9">Рухомі голови</option>
+						      	<option value="10">Сканери</option>
+						      	<option value="11">Заливаючи пари</option>
+						      	<option value="12">Лазери</option>
+						      	<option value="13">Дискоефекти</option>
+						      	<option value="14">Стробоскопи</option>
+						      	<option value="15">Спец. ефекти</option>
+						      	<option value="16">Прилади керування світлом</option>
+						      	<option value="17">Ферми,лебідки,стійки</option>
+						      	<option value="18">Інше світлове начиння</option>
+						      </optgroup>
+						       <optgroup label="Студійне обладнання">
+						      	<option value="19">Студійні монітори</option>
+						      	<option value="20">Студійні підсилювачі</option>
+						      	<option value="21">Навушники</option>
+						      	<option value="22">Звукові інтерфейси(карти)</option>
+						      	<option value="23">Студійні мікрофони</option>
+						      	<option value="24">Студійні преампи</option>
+						      	<option value="25">Міді клавіатури/контроллери</option>
+						      	<option value="26">Студійний софт</option>
+						      	<option value="27">Інше студійне начиння</option>
+						      </optgroup>
+						       <optgroup label="Музичні інструменти">
+						      	<option value="25">Гітари</option>
+						      	<option value="26">Клавішні інструменти</option>
+						      	<option value="27">Ударні інструменти</option>
+						      	<option value="28">Духові інструменти</option>
+						      	<option value="29">Народні інструменти</option>
+						      	<option value="30">Струнно-смичкові</option>
+						      	<option value="31">Комбопідсилювачі</option>
+						      	<option value="32">Аксесуари</option>
+						      </optgroup>
+
+						    </select>
+
+						</div>
+						  <div class="input-field col s2 select_region">
+						    <select>
+						      <option value="" selected>Виберіть вид</option>
+						      <option value="1">Вид</option>
+						      <option value="2">Вид 2</option>
+						      <option value="3">Вид 3</option>
+						    </select>
+
+						 </div>
+						 <div class="input-field col s2  select_region">
+						    <select>
+						      <option value="" disabled selected>Стан</option>
+						      <option value="1">Нове</option>
+						      <option value="2">Б/У</option>
+						    </select>
+
+						 </div>
+
+
+
+						 <div class="input-field col s2 ">
+							<label>
+					        	<input type="checkbox" checked="checked" />
+					        	<span>Не показувати протермінованні оголошення</span>
+					    	</label>
+
+						 </div>
+
+						  <div class="col s12"><button class="btn waves-effect sbmt col s4 offset-s4" type="submit" name="action">Знайти
+    							<i class="material-icons right">send</i>
+ 						 </button></div>
+     				</div>
+				</form>
+			</div>
+		</div>
+		<div class="all_products col s12">
+			 <div class="row">
+			    <div class="col s12">
+			      <ul class="tabs ">
+							{% if z %}
+			        	<li class="tabk col s4 "><a href="{% url 'main_shop' %}" >Всі</a></li>
+			        	<li class="tabk col s4"><a  href="{% url 'is_business' bool=1 %}" class="active ">Бізнес</a></li>
+			        	<li class="tabk col s4"><a href="{% url 'is_business' bool=0 %}">Приватні</a></li>
+							{% elif f %}
+								<li class="tabk col s4 "><a href="{% url 'main_shop' %}">Всі</a></li>
+			        	<li class="tabk col s4"><a  href="{% url 'is_business' bool=1 %}">Бізнес</a></li>
+			        	<li class="tabk col s4"><a href="{% url 'is_business' bool=0 %}" class="active ">Приватні</a></li>
+							{% else %}
+								<li class="tabk col s4 "><a href="{% url 'main_shop' %}" class="active ">Всі</a></li>
+			        	<li class="tabk col s4"><a  href="{% url 'is_business' bool=1 %}">Бізнес</a></li>
+			        	<li class="tabk col s4"><a href="{% url 'is_business' bool=0 %}">Приватні</a></li>
+
+							{% endif %}
+						</ul>
+			    </div>
+			    <div id="test1" class="col s12">
+			    	<div class="row">
+					{% for g in goods %}
+					  <div class="card col m4 s12 goods" >
+					    <div class="card-image waves-effect waves-block waves-light">
+								<a href="{% url 'goods' pk=g.id %}">
+									<img class="activator responsive-img" src="/static/{{ g.photo }}">
+								</a>
+					    </div>
+					    <div class="card-content">
+
+					      <span class="card-title activator grey-text text-darken-4">{{ g.title|safe|truncatechars:25  }}<i class="material-icons right">more_vert</i></span>
+					      <!-- <p><a href="{% url 'goods' pk=g.pk %}">This is a link</a></p> -->
+
+							</div>
+					    <div class="card-reveal">
+
+					      <span class="card-title grey-text text-darken-4">{{ g.title }}<i class="material-icons right">close</i></span>
+								<a href="{% url 'goods' pk=g.id %}">
+					      <p>{{ g.description }}</p></a>
+					    </div>
+					  </div>
+					  {% endfor %}
+					  </div>
+
+			    </div>
+			   <!--{#  <div id="test3" class="col s12">
+					{% for g in goods %}
+					  <div class="card col m4 s12 goods">
+					    <div class="card-image waves-effect waves-block waves-light">
+								<a href="{% url 'goods' pk=g.id %}">
+					      	<img class="activator responsive-img" src="http://praktikaprava.ru/wp-content/uploads/2017/11/obmen-tovara-v-techenii-14-dnej.jpg">
+								</a>
+						  </div>
+					    <div class="card-content">
+					      <span class="card-title activator grey-text text-darken-4 title">{{ g.title|safe|truncatechars:25 }}<i class="material-icons right">more_vert</i></span>
+
+					    </div>
+					    <div class="card-reveal">
+									<a href="{% url 'goods' pk=g.id %}">
+					      <span class="card-title grey-text text-darken-4 title">{{ g.title }}<i class="material-icons right">close</i></span>
+					      <p>{{ g.description }}</p> </a>
+					    </div>
+					  </div>
+					  {% endfor %}
+
+					    </div> #} -->
+					<div class="pagination" style="text-align:center;">
+						<span class="step-links">
+								{% if goods.has_previous %}
+									<a href="?page={{ goods.previous_page_number }}">Попередня сторінка</a>
+								{% endif %}
+								<span class="current">
+										Сторінка {{ goods.number }} з {{ goods.paginator.num_pages }}.
+								</span>
+								{% if goods.has_next %}
+									<a href="?page={{ goods.next_page_number }}">Наступна сторінка</a>
+								{% endif %}
+						</span>
+					</div>
+ 			 </div>
+		</div>
+
+
+
+	</div>
+
+</section>
+
+
+
+
+{% endblock %}

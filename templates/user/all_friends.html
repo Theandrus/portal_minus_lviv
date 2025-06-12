@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="col s6">
+	<div class="row">
+		<form class="col s12" method="GET" action="{% url 'user_search' %}">
+      		<div class="row">
+        		<div class="input-field col s12" >
+          			<i class="material-icons prefix">search</i>
+          			<input id="icon_prefix" type="text" class="validate user_search" name="search">
+          			<label for="icon_prefix">Пошук користувачів</label>
+								<!-- <input type="submit"  style="display:none;"> -->
+        		</div>
+
+      		</div>
+    	</form>
+
+
+			<div class="authors col s12 m10 offset-m1 list">
+				<div class="row">
+					<h3>Заявки в друзі</h3>
+	                {% for friend_request in friends_requests %}
+					<div class="col s12">
+						<ul class="collection">
+							    <li class="collection-item avatar">
+							      <img src="" alt="" class="circle">
+							      <span class="title" style="color:#9ACD32;">{{ friend_request.from_user.username }}</span>
+							      <p style="font-weight: bold;"> {{ u.first_name }} {{ u.last_name }} <br>
+							         {{ u.email }}
+							      </p>
+							      <a href="" class="secondary-content"><i class="material-icons">send</i></a>
+							    </li>
+
+							 </ul>
+
+					</div>
+	                {% endfor %}
+				</div>
+			</div>
+
+		<div class="authors col s12 m10 offset-m1 list">
+			<div class="row">
+				<h3>Друзі</h3>
+				{% load my_tags %}
+
+
+
+				{% for u in users %}
+				<div class="col s12">
+					<ul class="collection">
+						    <li class="collection-item avatar">
+						      <img src="{% avatar pk=u.user.id %}" alt="" class="circle">
+						      <span class="title" style="color:#9ACD32;">{{ u.user.username }}</span>
+						      <p style="font-weight: bold;">{{ u.user.first_name }} {{ u.user.last_name }} <br>
+						        {{ u.user.email }}
+						      </p>
+						      <a href="{% url 'user_page' pk=u.id %}" class="secondary-content"><i class="material-icons">send</i></a>
+						    </li>
+
+						 </ul>
+
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+</div>
+</section>
+
+
+{% endblock %}

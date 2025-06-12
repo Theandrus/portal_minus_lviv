@@ -1,0 +1,508 @@
+
+{% extends 'base_2.html' %}
+
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+<div class="user_modal hide">
+	<div class="user_modal__wrapper ">
+
+		<svg class="user__modal__close" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="cancelIconTitle" stroke="#ffffff" stroke-width="0.5" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#000000"> <title id="cancelIconTitle">Cancel</title> <path d="M15.5355339 15.5355339L8.46446609 8.46446609M15.5355339 8.46446609L8.46446609 15.5355339"/> <path d="M4.92893219,19.0710678 C1.02368927,15.1658249 1.02368927,8.83417511 4.92893219,4.92893219 C8.83417511,1.02368927 15.1658249,1.02368927 19.0710678,4.92893219 C22.9763107,8.83417511 22.9763107,15.1658249 19.0710678,19.0710678 C15.1658249,22.9763107 8.83417511,22.9763107 4.92893219,19.0710678 Z"/> </svg>
+
+		<svg class="user__modal__back__icon hide" viewBox="0 0 524 524" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+
+</defs>
+
+			<g id="Layer_x0020_1">
+
+<path class="fil0" d="M262 0c72,0 138,29 185,77 48,47 77,113 77,185 0,72 -29,138 -77,185 -47,48 -113,77 -185,77 -72,0 -138,-29 -185,-77 -48,-47 -77,-113 -77,-185 0,-72 29,-138 77,-185 47,-48 113,-77 185,-77zm177 85c-45,-45 -108,-73 -177,-73 -69,0 -132,28 -177,73 -45,45 -73,108 -73,177 0,69 28,132 73,177 45,45 108,73 177,73 69,0 132,-28 177,-73 45,-45 73,-108 73,-177 0,-69 -28,-132 -73,-177z" id="Curve_x0020_767"/>
+
+				<path class="fil0" d="M208 368c2,3 2,7 0,9 -3,2 -6,2 -9,0l-110 -111c-3,-2 -3,-6 0,-8l110 -111c3,-2 6,-2 9,0 2,2 2,6 0,9l-107 106 107 106z" id="Curve_x0020_456"/>
+
+				<path class="fil0" d="M93 268c-3,0 -6,-3 -6,-6 0,-3 3,-6 6,-6l338 0c3,0 6,3 6,6 0,3 -3,6 -6,6l-338 0z" id="Curve_x0020_45"/>
+
+</g>
+
+</svg>
+
+		<div class="user_modal_choose_arranger">
+			<h3 class="user_modal_title">
+				Заявка на аранжувальника
+			</h3>
+			<div class="user_modal_choose_btns">
+
+
+
+                    <button class="applications exclusive" type="submit" name="button_pressed" value="button1" >
+                        Подати заявку на ексклюзивного аранжувальника
+                    </button>
+
+                    <button class="applications ordinary" type="submit" name="button_pressed" value="button2">
+                        Подати заявку на звичайного аранжувальника
+                    </button>
+			</div>
+
+		</div>
+
+
+		<div class="user_modal_main_content hide_modal">
+			<h3 class="user_modal_title">
+				Заявка на аранжувальника
+			</h3>
+			<div class="status_conditions">
+
+			</div>
+			<div class="user_modal__form-box">
+				<form class="user_modal_form_conditions user_modal_form_payment" action="#" method="POST">
+					{% csrf_token %}
+					<label>
+						<input class="user_modal_condition_checkbox" type="checkbox" name="subscribe">
+						<span>Погоджуюся з умовами</span>
+					</label>
+					<button  class="user_modal_btn_conditions disabled user_modal_form_conditions_payment_btn">
+						Подати заявку
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="user_modal_form_wrapper hide_modal">
+			<h3 class="user_modal_title">
+				Оплата
+			</h3>
+			<form action="{% url 'subscribe' %}" method="POST" class="user_modal_form">
+                {% csrf_token %}
+
+                <input type="hidden" name="data" value="{data}">
+                <input type="hidden" name="signature" value="{signature}">
+
+				<div class="user_modal_form_item">
+					<label for="user_modal_form_input_surname">Прізвище</label>
+					<input type="text" name="user_modal_form_input_surname" id="user_modal_form_input_surname" class="minus_modal_form_input">
+				</div>
+				<div class="user_modal_form_item">
+					<label for="user_modal_form_input_name">Ім'я</label>
+					<input type="text" name="user_modal_form_input_name" id="user_modal_form_input_name" class="minus_modal_form_input">
+				</div>
+				<div class="user_modal_form_item">
+					<label for="user_modal_form_input_email">Пошта</label>
+					<input type="text" name="user_modal_form_input_email" id="user_modal_form_input_email" class="minus_modal_form_input">
+				</div>
+				<div class="user_modal_form_item">
+					<label for="user_modal_form_input_phone">Телефон</label>
+					<input type="tel" name="user_modal_form_input_phone" id="user_modal_form_input_phone" class="minus_modal_form_input">
+				</div>
+				<div class="user_modal_form_btn_box">
+					<button class="user_modal_form_btn " type="submit">Оплатити</button>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+
+</div>
+
+
+<div class="get_money_modal hide">
+	<div class="get_money_modal__wrapper ">
+
+		<svg class="get_money_modal__close" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="cancelIconTitle" stroke="#ffffff" stroke-width="0.5" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#000000"> <title id="cancelIconTitle">Cancel</title> <path d="M15.5355339 15.5355339L8.46446609 8.46446609M15.5355339 8.46446609L8.46446609 15.5355339"/> <path d="M4.92893219,19.0710678 C1.02368927,15.1658249 1.02368927,8.83417511 4.92893219,4.92893219 C8.83417511,1.02368927 15.1658249,1.02368927 19.0710678,4.92893219 C22.9763107,8.83417511 22.9763107,15.1658249 19.0710678,19.0710678 C15.1658249,22.9763107 8.83417511,22.9763107 4.92893219,19.0710678 Z"/> </svg>
+
+		<svg class="get_money_modal__back__icon hide" viewBox="0 0 524 524" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+
+</defs>
+
+			<g id="Layer_x0020_1">
+
+<path class="fil0" d="M262 0c72,0 138,29 185,77 48,47 77,113 77,185 0,72 -29,138 -77,185 -47,48 -113,77 -185,77 -72,0 -138,-29 -185,-77 -48,-47 -77,-113 -77,-185 0,-72 29,-138 77,-185 47,-48 113,-77 185,-77zm177 85c-45,-45 -108,-73 -177,-73 -69,0 -132,28 -177,73 -45,45 -73,108 -73,177 0,69 28,132 73,177 45,45 108,73 177,73 69,0 132,-28 177,-73 45,-45 73,-108 73,-177 0,-69 -28,-132 -73,-177z" id="Curve_x0020_767"/>
+
+				<path class="fil0" d="M208 368c2,3 2,7 0,9 -3,2 -6,2 -9,0l-110 -111c-3,-2 -3,-6 0,-8l110 -111c3,-2 6,-2 9,0 2,2 2,6 0,9l-107 106 107 106z" id="Curve_x0020_456"/>
+
+				<path class="fil0" d="M93 268c-3,0 -6,-3 -6,-6 0,-3 3,-6 6,-6l338 0c3,0 6,3 6,6 0,3 -3,6 -6,6l-338 0z" id="Curve_x0020_45"/>
+
+</g>
+
+</svg>
+
+		<div class="get_money_modal_main_content">
+			<h3 class="get_money_modal_title">
+				Всього коштів: ₴567
+			</h3>
+			<div class="get_money_conditions">
+				Вивести можна не менше ніж 500 грн!
+			</div>
+			<div  class="get_money_modal_btn_conditions get_money_modal_form_conditions_payment_btn">
+				Вивести кошти
+			</div>
+		</div>
+
+		<div class="get_money_modal_form_wrapper hide_modal">
+			<h3 class="get_money_modal_title">
+				Виведення коштів
+			</h3>
+			<form  method="POST" class="get_money_modal_form">
+
+				<input type="hidden" name="data" value="{data}">
+				<input type="hidden" name="signature" value="{signature}">
+
+				<div class="get_money_modal_form_item">
+					<label for="get_money_modal_form_input_surname">Прізвище</label>
+					<input type="text" name="get_money_modal_form_input_surname" id="get_money_modal_form_input_surname" class="get_money_modal_form_input">
+				</div>
+				<div class="get_money_modal_form_item">
+					<label for="get_money_modal_form_input_name">Ім'я</label>
+					<input type="text" name="get_money_modal_form_input_name" id="get_money_modal_form_input_name" class="get_money_modal_form_input">
+				</div>
+				<div class="get_money_modal_form_item">
+					<label for="get_money_modal_form_input_email">Пошта</label>
+					<input type="text" name="get_money_modal_form_input_email" id="get_money_modal_form_input_email" class="get_money_modal_form_input">
+				</div>
+				<div class="get_money_modal_form_item">
+					<label for="get_money_modal_form_input_phone">Телефон</label>
+					<input type="tel" name="get_money_modal_form_input_phone" id="get_money_modal_form_input_phone" class="get_money_modal_form_input" value="380">
+				</div>
+				<div class="get_money_modal_form_item">
+					<label for="get_money_modal_form_input_amount">Сума виведення (мінімум 500 грн)</label>
+					<input type="number" name="get_money_modal_form_input_amount" id="get_money_modal_form_input_amount" class="get_money_modal_form_input" min="500">
+				</div>
+				<div class="get_money_modal_form_item">
+					<label for="get_money_modal_form_input_card">Карта</label>
+					<input type="number" name="get_money_modal_form_input_card" placeholder="XXXX XXXX XXXX XXXX"  id="get_money_modal_form_input_card" class="get_money_modal_form_input">
+				</div>
+				<div class="get_money_modal_form_btn_box">
+					<button class="get_money_modal_form_btn" type="submit">Вивести кошти</button>
+				</div>
+
+			</form>
+		</div>
+
+		<div class="get_money_modal_form_wrapper proceeding_status hide_modal">
+
+			<div class="loader"></div>
+			<svg class="success_checkmark hide" xmlns="http://www.w3.org/2000/svg" fill="#6baf00" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24">
+				<path d="M 12 2 C 6.486 2 2 6.486 2 12 C 2 17.514 6.486 22 12 22 C 17.514 22 22 17.514 22 12 C 22 10.874 21.803984 9.7942031 21.458984 8.7832031 L 19.839844 10.402344 C 19.944844 10.918344 20 11.453 20 12 C 20 16.411 16.411 20 12 20 C 7.589 20 4 16.411 4 12 C 4 7.589 7.589 4 12 4 C 13.633 4 15.151922 4.4938906 16.419922 5.3378906 L 17.851562 3.90625 C 16.203562 2.71225 14.185 2 12 2 z M 21.292969 3.2929688 L 11 13.585938 L 7.7070312 10.292969 L 6.2929688 11.707031 L 11 16.414062 L 22.707031 4.7070312 L 21.292969 3.2929688 z"></path>
+			</svg>
+			<h3 class="get_money_modal_status">
+				Ваш запит обробляється
+			</h3>
+
+		</div>
+	</div>
+</div>
+
+<section class="col s12">
+	<div class="main_user_row">
+		<div class="col s12 m10 offset-m1 photo_and_contact main_user_box">
+			<div class="row" style="max-width: 1000px">
+
+
+
+				<div class="user__avatar-box">
+					<div class="avatar_mini">
+						<img src="/static/img/user.png" width="70px" height="70px">
+                        {% if user_subscription.exclusive is True %}
+						    <div class="strip profile" style=""><span>Ексклюзивний</span></div>
+                        {% endif %}
+<!--						<img src="/static/{% avatar pk=user.user.pk %}" class="rectengular responsive-img materialboxed"-->
+<!--							 alt="">-->
+					</div>
+					<div class="name_and_lastname">
+						<h1 style="font-size: 40px">{{ user.user.first_name }} {{ user.user.last_name }}</h1>
+                        <div class=" social__network-row">
+                            <a href="#" class="social__network-link">
+                                <svg class="social__network-link-icon"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6ZM6 4C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H12V13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H12V9.5C12 7.567 13.567 6 15.5 6H16.1C16.6523 6 17.1 6.44772 17.1 7C17.1 7.55228 16.6523 8 16.1 8H15.5C14.6716 8 14 8.67157 14 9.5V11H16.1C16.6523 11 17.1 11.4477 17.1 12C17.1 12.5523 16.6523 13 16.1 13H14V20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6Z" fill="#6baf00"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="social__network-link">
+                                <svg  class="social__network-link-icon"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="#6baf00"/>
+                                    <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="#6baf00"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="#6baf00"/>
+                                </svg>
+                            </a>
+                        </div>
+					</div>
+					<div class="user__star-rating-box">
+						<img src="/static/img/Star_full.svg.png" alt="" class="star__img">
+						<img src="/static/img/Star_full.svg.png" alt="" class="star__img">
+						<img src="/static/img/Star_full.svg.png" alt="" class="star__img">
+						<img src="/static/img/Star_full.svg.png" alt="" class="star__img">
+						<img src="/static/img/Star_full.svg.png" alt="" class="star__img">
+					</div>
+					{% if user.id == user.id %}<div class="user_control_btn">
+					<a class="edit_profile" href="{% url 'profile_update' pk=user.id %}">Редагувати профіль</a>
+
+				    {% if x.is_superuser %}
+                        <a class="applications" href="{% url 'applications' %}"> Заявки до адміністрації</a>
+						<a class="applications" href="{% url 'arrangers_list' %}">Аранжувальники</a>
+                    {% else %}
+                       {% if user_subscription == 0 %}
+
+                           <div  class="payment_btn status_btn applications"> Стати аранжувальником</div>
+                       {% endif %}
+                       {% if user_subscription.is_paid is True %}
+					<!--		КНОПКИ ДЛЯ АРАНЖУВАЛЬНИКА    -->
+							<div  class="applications statistic_btn"> Статистика</div>
+							<div  class="applications get_money_btn"> Вивести кошти</div>
+					<!--		Статус заявки на виведення коштів в профілі аранжувальника     -->
+<!--						<div class="status">Запит очікує відповіді адміністратора</div>-->
+<!--						<div class="status"> Запит підтверджено</div>-->
+{#							<div class="status">Запит відхилено</div>#}
+                       {% endif %}
+                       {% if user_subscription.is_accepted is False %}
+                           <div  class="applications"> Заявку розглядається</div>
+                       {% elif user_subscription.is_accepted is True and user_subscription.is_paid is False %}
+                           <div  class="applications"> Оплатіть рахунок на пошті</div>
+                       {% endif %}
+
+                    {% endif %}
+				</div>
+
+					{% endif %}
+
+				</div>
+
+				<!--    СТАТИСТИКА   -->
+
+				<div class="container">
+					<ul class="responsive-table">
+						<li class="table-header">
+							<div class="col col-1">Запис</div>
+							<div class="col col-2">Вартість</div>
+							<div class="col col-3">Кількість користувачів, <br> що придбали запис</div>
+							<div class="col col-4">Всього</div>
+						</li>
+						<li class="table-row">
+							<div class="col col-1" data-label="Запис: "><span>Ольга Монастирська - Многая літа</span></div>
+							<div class="col col-2" data-label="Вартість: "><span>$20</span></div>
+							<div class="col col-3" data-label="Придбано: "><span>350</span></div>
+							<div class="col col-4" data-label="Всього: "><span>$1000</span></div>
+						</li>
+						<li class="table-row">
+							<div class="col col-1" data-label="Запис: "><span>Ольга Монастирська - Многая літа</span></div>
+							<div class="col col-2" data-label="Вартість: "><span>$20</span></div>
+							<div class="col col-3" data-label="Придбано:"><span>350</span></div>
+							<div class="col col-4" data-label="Всього: "><span>$1000</span></div>
+						</li>
+						<li style="font-weight: bold; font-size: 18px;" class="total-row">
+							<div class="col col-1">Всього:</div>
+							<div  class="col col-3" data-label="Всього:">$115</div>
+						</li>
+					</ul>
+				</div>
+				<div class=" user__info__row" style="padding-top: 20px">
+                    <div class="user__info__row__item">
+                        {% if user.user.is_superuser == 1 %}<p style="color: red;"> Адміністратор {% else %}<p style="color: green;">{{ user.status_title }}{% endif %}</p>
+                        <pre><p>Рейтинг:   {{ user.rating.rating }}</p></pre>
+                        <p><pre style="color: #6baf00">Заслуги: </pre> </p>
+                        <!--  <i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i>< -->
+                        <p>На сайті з: {{ user.user.date_joined }}</p>
+                        <p>Востаннє заходив: {{ user.user.last_login }}</p>
+
+                        <!-- ПРОСТАВИТИ СИЛКУ  -->
+                        <br>
+
+                        {% if user.is_authenticated %}
+                        <div style="margin-bottom: 10px; margin-top: 0px;" class="right">
+                            <input type="button" class="btn" id="add_to_friend" style="color: green; background-color: white;" value="{% if is_friend %}Ви друзi{% else %} Додати друга {% endif %}">
+                            <span id="user_id" style="display:none;">{{ user.id }} </span>
+                            <span id="to_user_id" style="display:none;">{{ user.user.id }}</span>
+                        </div>
+                        <script src="{% static 'js/user/main_user_page.js' %}"></script>
+                        {% endif %}
+
+                    </div>
+                    <div class="user__info__row__item">
+						<div class="user__info__row__item-box">
+							<div class="col "><p>Країна</p></div>
+							<div class="col "><p>{% if user.country %}{{ user.country }}{% else %} немає {% endif %}</p></div>
+						</div>
+						<div class="user__info__row__item-box">
+							<div class="col "><p>Місто:</p></div>
+							<div class="col "><p>{% if user.city %}{{ user.city}}{% else %} немає {% endif %}</p></div>
+						</div>
+						<div class="user__info__row__item-box">
+							<div class="col "><p>Стать:</p></div>
+							<div class="col "><p>{% if user.gender %}{{ user.gender}}{% else %} немає {% endif %}</p></div>
+						</div>
+						<div class="user__info__row__item-box">
+							<div class="col "><p>Д/Н:</p></div>
+							<div class="col "><p>{% if user.birthdate %}{{ user.birthdate }}{% else %} немає {% endif %}</p></div>
+						</div>
+						<div class="user__info__row__item-box">
+							<div class="col "><p>На сайті з:</p></div>
+							<div class="col "><p>{{ user.user.date_joined }}</p></div>
+						</div>
+
+
+
+
+
+                    </div>
+
+				</div>
+
+				<div class=" main_btn ">
+					<div class=" main_btn_user" style="padding-top: 20px">
+
+
+					  {#<a class="waves-effect waves-light btn-large col s3 user_use" href="{% url 'message_user' pk=user.user.id %}">Повідомлення</a>#}
+						<a class="main_btn_item s3 user_use" href="{% url 'userminuses' user_id=user.user.id %}">Мінусовки</a>
+						<a class="main_btn_item user_use">Записи</a>
+						<a class="main_btn_item user_use" href="{% url 'user_album' pk=user.user.id %}">Галерея</a>
+                        <a  class="main_btn_item" href="{% url 'user_goods' user_id=user.user.id %}">Товари користувача</a>
+<!--						<script>-->
+
+<!--							if (screen.width < 1024) {-->
+<!--								var btn = document.getElementsByClassName('user_use');-->
+<!--								btn[0].innerHTML="<i class='small material-icons'>email</i>";-->
+<!--								btn[1].innerHTML="<i class='large material-icons'>audiotrack</i>";-->
+<!--								btn[2].innerHTML="<i class='large material-icons'>headset</i>";-->
+<!--								btn[3].innerHTML = "<i class='large material-icons'>filter</i>";-->
+<!--							}-->
+
+
+<!--						</script>-->
+					</div>
+				</div>
+				<div class="" >
+				<div class="" style="">
+					<div class="col s12 more_about">
+						<div class="more_about_user row">
+
+
+
+						<div class="user_activity">
+							<h6>Активність користувача </h6>
+							<div class="user_activity_row">
+								<ul class="collapsible expandable">
+								  <li class="comments">
+									<div class="collapsible-header tops">
+										Останні коментарі:
+									<span class="badge"></span></div>
+									<div class="collapsible-body">
+										{% for c in user.comments %}
+											{% if c.content_type_id != 45 %}
+											<div>{% if c.content_type_id == 52 %}<a style="color:#6baf00;" href="{% url 'goods' pk=c.object_pk %}"> {% elif c.content_type_id == 17 %}<a href="{% url 'minus' pk=c.object_pk %}"> {% else %}<a href="{% url 'news_index' pk=c.object_pk %}">{% endif %}{{ c.comment|truncatechars:150 }}</a></div>
+											{% endif %}
+										{% endfor %}
+									</div>
+								  </li>
+								  <li class="comments">
+								  	<div class="collapsible-header tops">
+										Останні повідомлення на форумi:
+										<span class="badge"></span></div>
+									<div class="collapsible-body">
+										{% for f in user.forum %}
+										<div >
+											<a style="color:#FFFFFF;" href="http://minus.lviv.ua/forum/thread/{{ f.thread_id }}/">
+											<p >{{ f.thread_text }}</p>
+											<br>
+											<p>{% if f.author.first_name or f.author.last_name %} {{ f.author.first_name }} {{ f.author.last_name }}: {% else %} {{ f.author.username }} {% endif %} </p><br>
+											<span style="color:black;">{{ f.body|striptags }}</span><br>
+			                                </a>
+										</div>
+										<br>
+							    	{% endfor %}
+									</div>
+
+								  </li>
+								</ul>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 about_me">
+				<div class="row">
+
+				<div class="col s12">
+					<h5 style="color: #6baf00">Друзі користувача:</h5><br>
+					<ul class="collection">
+                      {% for friend in friends %}
+						    <li class="collection-item avatar">
+						      <img src="/static/{% avatar pk=friend.user.id %}" alt="" class="circle">
+						      <span class="title" style="color:#9ACD32;">{{ friend.user.username }}</span>
+						      <p style="font-weight: bold;">{{ friend.user.first_name }} {{ friend.user.last_name }} <br>
+						        {{ u.email }}
+						      </p>
+						      <a href="{% url 'user_page' pk=friend.user.id %}" class="secondary-content"><i class="material-icons">send</i></a>
+						    </li>
+                       {% endfor %}
+
+
+						 </ul>
+					<a href="{% url 'all_friends' pk=user.user.id %}" style="color:#9ACD32;font-weight: bold;"> Ще друзі...</a>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m6 wall">
+				<div class="row">
+					{% if user.is_authenticated %}
+						{% if user.id == user.user.id %}
+							<form method="POST" enctype="multipart/form-data">
+								{% csrf_token %}
+								<h5>Добавте пост на свою стiну</h5>
+									{{ add_post_form.as_table }}
+									<button type="submit" style="float:right;background-color: #6baf00;" class="btn">Вiдправити</button>
+
+							</form>
+						{% endif %}
+					{% endif %}
+					{% for post in posts %}
+						<div class="post col s12">
+							<h6 class="author">{{ post.userprofile.user.first_name }} {{ post.userprofile.user.last_name }}</h6>
+
+							<!-- <span style="color:gray;">{{ post.pub_date }}</span> -->
+							<p>{{ post.text }}</p><br>
+							{% if post.image %}
+								<p><img class="materialboxed" src="/{{ post.image }}"></p>
+							{% endif %}
+							{% if user.is_authenticated %}
+							  <div style="float:left;">
+								<a class="waves-effect waves-light btn-large like" id="{{ minus.id }}"><i class="material-icons left">mood</i><span>
+								</span><span style="display:none;" id="userl">{{ user.id }}</span></a>
+							   <a class="waves-effect waves-light btn-large dislike" id="{{ minus.id }}"><i class="material-icons left">mood_bad</i><span>
+							   </span></a>
+							  </div>
+							{% endif %}
+							<span style="color:gray;float:right;">{{ post.pub_date }}</span>
+
+						</div>
+
+
+
+
+
+
+
+					{% endfor %}
+				</div>
+
+			</div>
+
+
+		</div>
+
+			</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<script src="/static/js/userModal.js"></script>
+<script src="/static/js/getMoneyModal.js"></script>
+<script src="/static/js/statisticShow.js"></script>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<form class="col s12 m10 offset-m1 reg" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<h2 style="color: #9ACD32">Змінити інформацію профілю</h2>
+			{{ form.as_p }}
+
+			<div class="form__item">
+				<input type="checkbox" class="form__checkbox">
+				<p class="form__item__text">
+					Із <a href="#">правилами порталу </a> ознайомлений
+				</p>
+			</div>
+
+			<button type="submit" class="sbm_auth waves-effect waves-light btn-large col s12" value="Update">Змінити</button>
+
+		</form>
+
+	</div>
+</section>
+{% endblock %}

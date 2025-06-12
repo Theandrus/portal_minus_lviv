@@ -1,0 +1,21 @@
+node-modules/
+micro.pdf
+ad
+package-lock.json
+static/js/dist/
+web/mysql
+.idea/
+.env
+.DS_Store
+__pycache__/
+*.py[cod]
+.env
+.vscode/
+
+# Ignore project-specific files
+.babelrc
+commands.sql
+db.sqlite3
+wkhtmltox/
+webpack.config.js
+static/

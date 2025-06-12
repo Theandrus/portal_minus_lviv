@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+                <section class="user-list col s6">
+                    <div class="row">
+<!--                        <form class="col s12" method="GET" action="{% url 'user_search' %}">-->
+<!--                            <div class="row">-->
+<!--                                <div class="input-field col s12" >-->
+<!--                                    <i class="material-icons prefix">search</i>-->
+<!--                                    <input id="icon_prefix" type="text" class="validate user_search" name="search">-->
+<!--                                    <label for="icon_prefix">Пошук користувачів</label>-->
+<!--                                    &lt;!&ndash; <input type="submit"  style="display:none;"> &ndash;&gt;-->
+<!--                                </div>-->
+
+<!--                            </div>-->
+<!--                        </form>-->
+
+
+                        <div class="authors col s12 m10 offset-m1 list">
+                            <div class="row">
+                                <h3>Аранжувальники</h3>
+
+                                {% for u in users %}
+                                <div class="col s12">
+                                    <ul class="collection">
+                                        <li class="collection-item avatar">
+                                            <div class="avatar-box">
+                                                <img src="/static/{% avatar pk=u.id %}" alt="" class="circle">
+                                                <div class="strip" style=""><span style="color: black !important">Ексклюзивний</span></div>
+                                            </div>
+                                            <div>
+                                                <span class="title" style="color:#9ACD32;">{{ u.username }}</span>
+                                                <p style="color: #6baf00">Аранжувальник</p>
+                                                <p style="font-weight: bold;">{{ u.first_name }} {{ u.last_name }} <br>
+                                                    {{ u.email }}
+                                                </p>
+                                            </div>
+                                            <a href="{% url 'user_page' pk=u.id %}" class="secondary-content"><i class="material-icons">send</i></a>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                                {% endfor %}
+                                <div class="pagination">
+					<span class="step-links">
+							{% if users.has_previous %}
+								<a href="?page={{ users.previous_page_number }}">Попередня сторінка</a>
+							{% endif %}
+							<span class="current">
+									Сторінка {{ users.number }} з {{ users.paginator.num_pages }}.
+							</span>
+							{% if users.has_next %}
+								<a href="?page={{ users.next_page_number }}">Наступна сторінка</a>
+							{% endif %}
+					</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+{% endblock %}

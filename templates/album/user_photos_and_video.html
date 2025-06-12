@@ -1,0 +1,74 @@
+
+{% extends 'base_2.html' %}
+
+{% load static %}
+{% load my_tags %}
+{% block content %}
+<section class="col s12">
+	<div class="row">
+		<div class="col s12 m10 offset-m1 photo_and_contact">
+			<div class="row">
+				<div class="avatar_mini col s3">
+					<img src="{% avatar pk=user.user.id %}"  class="rectengular responsive-img" alt="">
+					<div>
+						<table>
+							<tr>
+								<td>+</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>40</td>
+								<td>1</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="col s9 name_and_lastname">
+					<h1>{{ user.user.first_name }} {{ user.user.last_name }}</h1>
+				</div>
+
+				<div class="col s9 status">
+					<p style="color: green;">{{ user.status_title }}</p>
+					<pre><p>Рейтинг:   {{ user.rating.rating }}</p></pre>
+					<p><pre>Заслуги:    <i class="material-icons">star</i><i class="material-icons">star</i><i class="material-icons">star</i></pre></p>
+					<p>На сайті з: {{ user.user.date_joined }}</p>
+					<p>Востаннє заходив: {{ user.user.last_login }}</p>
+					<div style="display: inline-block;"><a style="text-decoration: none; color: green;" href="#">Товари користувача</a></div><br>
+				{% if request.user.is_authenticated %}
+					<div style="margin-bottom: 10px; margin-top: 0px;" class="right">
+						<input type="button" class="btn" id="add_to_friend" style="color: green; background-color: white;" value="{% if is_friend %}Ви друзi{% else %} Додати друга {% endif %}">
+						<span id="user_id" style="display:none;">{{ request.user.id }} </span>
+						<span id="to_user_id" style="display:none;">{{ user.user.id }}</span>
+					</div>
+					<script src="{% static 'js/user/main_user_page.js' %}"></script>
+				{% endif %}
+				</div>
+
+				<div class="col s12 main_btn">
+					<div class="row">
+						<a class="waves-effect waves-light btn-large col s3" href="{% url 'message_user' pk=user.user.id %}">Повідомлення</a>
+						<a class="waves-effect waves-light btn-large col s3" href="{% url 'userminuses' user_id=user.user.id %}">Мінусовки</a>
+						<a class="waves-effect waves-light btn-large col s3">Записи</a>
+						<a class="waves-effect waves-light btn-large col s3" href="{% url 'user_album' pk=user.user.id %}">Фото і відео</a>
+
+					</div>
+				</div>
+				<div class="col s12">
+					<div class="row">
+					<div class="col s12">
+						<a class="waves-effect waves-light btn-large col s3 offset-s4" href="{% url 'add_photo' %}" style="background-color:#6baf00;" >Додати фото</a>
+						<br><br>
+					</div>
+					{% for photo in photos %}
+						<div class="photo col s3 materialboxed"><img src="/static/{{ photo.image }}" alt=""></div>
+
+					{% endfor %}
+					</div>
+				</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}

@@ -1,0 +1,48 @@
+
+{% extends 'base_2.html' %}
+
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<section class="col s12">
+    <div class="main_user_row">
+        <div class="arrangers-list col s12 m10 offset-m1">
+            <div class="row" style="max-width: 1000px">
+                <h1 class="arrangers-section-title">Аранжувальники</h1>
+                <div class="arrangers">
+                    {% for arranger in arrangers %}
+                    <div class="arranger_item">
+                        <div class="arranger-header">
+                            <div class="arranger-box">
+                                <img src="" alt="user_avatar" />
+                                <div class = "arranger-data">
+                                    <p>{{ arranger.user.username }}</p>
+                                    <p>{{ arranger.surname }} {{ arranger.name }}</p>
+                                    <p>{{ arranger.email }}</p>
+                                </div>
+                            </div>
+                            <div class="files-button">
+                                <span>Список завантажених файлів</span>
+                                <script src="https://cdn.lordicon.com/lordicon-1.2.0.js"></script>
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/rmkahxvq.json"
+                                        colors="primary:#6baf00"
+                                        style="width:25px !important;height:25px !important;">
+                                </lord-icon></div>
+                        </div>
+                        <div class="files-list">
+                            <a href="">Запис - <span style="color: #6baf00">АВТОР</span></a>
+                            <a>Запис - <span style="color: #6baf00">АВТОР</span></a>
+                            <a>Запис - <span style="color: #6baf00">АВТОР</span></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

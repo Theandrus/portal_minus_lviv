@@ -1,0 +1,322 @@
+{% load static %}
+{% load my_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<title>minus.lviv.ua</title>
+	<!-- Materialize -->
+	<link rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}">
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- mycss -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+
+</head>
+<body>
+
+<div class="father_GOD">
+	<header>
+		<nav class="nav-extended">
+			<div class="nav-wrapper top_menu">
+				<!--                <a href="{% url 'main' %}" class="brand-logo" id="logo"><img src="/static/img/logo.png"></a>-->
+				<a href="{% url 'main' %}" class="brand-logo" id="logo">
+					<div class="logo__box">
+						<div class="gif2" id="gif2">
+
+							<script>
+								let animation2 = bodymovin.loadAnimation({
+
+									container: document.getElementById('gif2'),
+
+									path: '/static/img/9TwD831Q9y.json',
+
+									renderer: 'svg',
+
+									loop: true,
+
+									autoplay: true,
+
+									name: "charts",
+
+								});
+							</script>
+
+						</div>
+
+						<div class="logo__content">
+							<p class="logo_text">
+								minus.lviv.ua
+							</p>
+							<p class="logo_text logo_text_custom ">
+								українські мінусовки
+							</p>
+						</div>
+					</div>
+
+				</a>
+				<!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger" style="color:#6baf00;"></a> -->
+				<ul class="right nav_row">
+					<!--                    <li><a href="{% url 'main' %}" class="top_menu_text">Новини</a></li>-->
+					<!--                    <li><a href="{% url 'activities' %}" class="top_menu_text">Події</a></li>-->
+					<!--                    <li><a href="{% url 'minusstore_main' %}" class="top_menu_text">Мінусовки</a></li>-->
+					<!--                    <li><a href="{% url 'main_shop' %}" id="blurb" class="top_menu_text">Куплю/продам</a></li>-->
+					<!--                    <li><a href="collapsible.html" class="top_menu_text">Форум</a></li>-->
+					<li class="tabik"><a href="{% url 'minusstore_main' %}" >Мінусовки</a></li>
+					<li class="tabik"><a href="{% url 'activities' %}" >Події</a></li>
+					<li class="tabik"><a href="{% url 'main_shop' %}" id="blurb" >Куплю/продам</a></li>
+
+					<li class="tabik"><a href="collapsible.html" >Форум</a></li>
+
+					<li class="tabik tabik_more_options"><p class="tabik_more_options-text ">Більше</p>  <i class="material-icons tabik_more_options_icon">expand_more</i>
+						<div class="tabik_dropdown ">
+							<ul class="tabik_dropdown-list">
+								<li class="tabik_dropdown-item "><a href="#" class="bmenu_a back_menu">Радіо</a></li>
+								<li class="tabik_dropdown-item"><a href="{% url 'main' %}" >Новини</a></li>
+								<li class="tabik_dropdown-item "><a target="_blank"
+																	href="https://www.youtube.com/channel/UC8ZIZXC1LSM97_cZDMIFJvA"
+																	class="bmenu_a back_menu">Youtube</a></li>
+
+								<li class="tabik_dropdown-item "><a href="#" class="bmenu_a back_menu">Конкурс вокалістів</a></li>
+								<li class="tabik_dropdown-item "><a href="{% url 'desk_of_respect' %}" class="bmenu_a back_menu">Дошка пошани</a>
+								</li>
+								<li class="tabik_dropdown-item "><a href="{% url 'desk_of_shame' %}" class="bmenu_a back_menu">Пауза користувача
+									<span style="color: #6baf00;"></span></a></li>
+								<!--<li class="tabik "><a href="#" class="bmenu_a back_menu">FAQ</a></li>-->
+								<!-- <li class="tabik "><a href="#" class="bmenu_a back_menu">Допомога </a></li> -->
+								<li class="tabik_dropdown-item "><a href="{% url 'userlist' %}" class="bmenu_a back_menu">Користувачі</a></li>
+								<li class="tabik_dropdown-item "><a href="{% url 'plusstore_main' %}" class="bmenu_a back_menu">Плюсовки</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				<div class="nav-content bottom_menu">
+					<a href="#" data-target="mobile-demo" class="sidenav-trigger"
+					   style="color:#6baf00;text-align:center;"><i class="material-icons">menu</i></a>
+					<!--                                    {% if user.is_authenticated %}-->
+
+					<!--                                    <ul class="login_menu">-->
+
+					<!--                                        <li class="tabik green_li" style="background-color: #6baf00;color:white;"><a-->
+					<!--                                                class="bmenu_a dropdown-trigger" href="#test2" style="color:white;" name="notifications"-->
+					<!--                                                data-target='dropdown1'><i class="small material-icons">notifications</i></a></li>-->
+
+					<!--                                    </ul>-->
+
+					<!--                                    {% endif %}-->
+
+
+				</div>
+
+			</div>
+
+
+		</nav>
+		<ul class="sidenav burger_menu" id="mobile-demo">
+
+			<li class="burger_menu_item "><a target="_blank" href="https://www.youtube.com/channel/UC8ZIZXC1LSM97_cZDMIFJvA"
+											 class="bmenu_a back_menu">Youtube</a></li>
+			<li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">Радіо</a></li>
+			<li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">Конкурс вокалістів</a></li>
+			<li class="burger_menu_item "><a href="{% url 'desk_of_respect' %}" class="bmenu_a back_menu">Дошка пошани</a></li>
+			<li class="burger_menu_item "><a href="{% url 'desk_of_shame' %}" class="bmenu_a back_menu">Пауза користувача <span
+					style="color:red;">4</span></a></li>
+			<li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">FAQ</a></li>
+			<!-- <li class="tabik "><a href="#" class="bmenu_a back_menu">Допомога </a></li> -->
+			<li class="burger_menu_item "><a href="{% url 'userlist' %}" class="bmenu_a back_menu">Користувачі</a></li>
+			<li class="burger_menu_item "><a href="{% url 'plusstore_main' %}" class="bmenu_a back_menu">Плюсовки</a></li>
+
+		</ul>
+
+	</header>
+
+<div class="container-fluid">
+	<div class="row">
+
+
+<!-- Ліва паннель  -->
+
+
+<!-- Центральна панель -->
+
+		{% block content %}
+
+
+		{% endblock %}
+
+		<!-- Права панель -->
+
+</div>
+
+
+	<footer class="page-footer">
+		<div class="container ">
+			<div class="footer__row">
+				<div class="footer__item">
+					<div class="logo__box">
+						<div class="gif2" id="gif1">
+
+							<script>
+								let animation1 = bodymovin.loadAnimation({
+
+									container: document.getElementById('gif1'),
+
+									path: '/static/img/9TwD831Q9y.json',
+
+									renderer: 'svg',
+
+									loop: true,
+
+									autoplay: true,
+
+									name: "charts1",
+
+								});
+							</script>
+
+						</div>
+
+						<div class="logo__content">
+							<p class="logo_text">
+								minus.lviv.ua
+							</p>
+							<p class="logo_text logo_text_custom ">
+								українські мінусовки
+							</p>
+						</div>
+					</div>
+					<div class="footer__social__link">
+						<svg fill="#6baf00" class="footer__social__icon" viewBox="0 -4 32 32"
+							 xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+							<path d="M30.722,20.579 C30.137,21.894 28.628,23.085 27.211,23.348 C27.066,23.375 23.603,24.000 16.010,24.000 L15.990,24.000 C8.398,24.000 4.932,23.375 4.788,23.349 C3.371,23.085 1.861,21.894 1.275,20.578 C1.223,20.461 0.001,17.647 0.001,12.000 C0.001,6.353 1.223,3.538 1.275,3.421 C1.861,2.105 3.371,0.915 4.788,0.652 C4.932,0.625 8.398,-0.000 15.990,-0.000 C23.603,-0.000 27.066,0.625 27.210,0.651 C28.628,0.915 30.137,2.105 30.723,3.420 C30.775,3.538 32.000,6.353 32.000,12.000 C32.000,17.647 30.775,20.461 30.722,20.579 ZM28.893,4.230 C28.581,3.529 27.603,2.759 26.845,2.618 C26.813,2.612 23.386,2.000 16.010,2.000 C8.615,2.000 5.185,2.612 5.152,2.618 C4.394,2.759 3.417,3.529 3.104,4.234 C3.094,4.255 2.002,6.829 2.002,12.000 C2.002,17.170 3.094,19.744 3.106,19.770 C3.417,20.471 4.394,21.241 5.153,21.382 C5.185,21.388 8.615,22.000 15.990,22.000 L16.010,22.000 C23.386,22.000 26.813,21.388 26.846,21.382 C27.604,21.241 28.581,20.471 28.894,19.766 C28.904,19.744 29.998,17.170 29.998,12.000 C29.998,6.830 28.904,4.255 28.893,4.230 ZM13.541,17.846 C13.379,17.949 13.193,18.000 13.008,18.000 C12.842,18.000 12.676,17.959 12.525,17.875 C12.206,17.699 12.008,17.364 12.008,17.000 L12.008,7.000 C12.008,6.637 12.204,6.303 12.521,6.127 C12.838,5.950 13.227,5.958 13.534,6.149 L21.553,11.105 C21.846,11.286 22.026,11.606 22.027,11.951 C22.028,12.296 21.852,12.618 21.560,12.801 L13.541,17.846 ZM14.009,8.794 L14.009,15.189 L19.137,11.963 L14.009,8.794 Z"/>
+						</svg>
+						<svg class="footer__social__icon" viewBox="0 -0.5 25 25" fill="none"
+							 xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								  d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+								  stroke="#6baf00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								  d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+								  stroke="#6baf00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)"
+								  fill="#6baf00"/>
+							<rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)"
+								  stroke="#6baf00" stroke-linecap="round"/>
+						</svg>
+						<svg class="footer__social__icon" viewBox="0 0 24 24" fill="none"
+							 xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								  d="M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H15V13.9999H17.0762C17.5066 13.9999 17.8887 13.7245 18.0249 13.3161L18.4679 11.9871C18.6298 11.5014 18.2683 10.9999 17.7564 10.9999H15V8.99992C15 8.49992 15.5 7.99992 16 7.99992H18C18.5523 7.99992 19 7.5522 19 6.99992V6.31393C19 5.99091 18.7937 5.7013 18.4813 5.61887C17.1705 5.27295 16 5.27295 16 5.27295C13.5 5.27295 12 6.99992 12 8.49992V10.9999H10C9.44772 10.9999 9 11.4476 9 11.9999V12.9999C9 13.5522 9.44771 13.9999 10 13.9999H12V21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20Z"
+								  fill="#6baf00"/>
+						</svg>
+					</div>
+				</div>
+
+
+				<div class="footer__item">
+					<h5 class="white-text">Головні посилання</h5>
+					<div class="footer__link__row">
+						<ul>
+							<li><a class="grey-text text-lighten-3" href="#!">Новини</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Події</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Мінусовки</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Куплю/продам</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!"> Форум</a></li>
+						</ul>
+						<ul>
+							<li><a class="grey-text text-lighten-3" href="#!">Youtube</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Радіо</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Конкурс вокалістів</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Дошка пошани</a></li>
+
+						</ul>
+						<ul>
+							<li><a class="grey-text text-lighten-3" href="#!">Пауза користувача </a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Дошка пошани</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Користувачі </a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Дошка пошани</a></li>
+							<li><a class="grey-text text-lighten-3" href="#!">Плюсовки </a></li>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<div class="footer-copyright" id="footer">
+			<p>
+				Усі мінусовки викладені лише для ознайомлення. © 2023 Українські мінусовки на minus.lviv.ua. Всі права
+				захищено.
+
+			</p>
+
+		</div>
+	</footer>
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<!-- materialize_js	 -->
+<script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+<script>
+	var loc = window.location;
+	var wsStart = 'ws://';
+	if (loc.protocol == 'https:'){
+		wsStart = 'wss://';
+	}
+	var request_user = {{ request.user.id }};
+	var endpoint = wsStart + '127.0.0.1:8000/'+ request_user + '/';
+	console.log(endpoint);
+	var socket = new WebSocket(endpoint);
+	console.log(socket);
+	socket.onmessage = function(e){
+		console.log('message',e);
+	}
+
+	socket.onopen = function(e){
+		console.log('open',e);
+	}
+
+	socket.onerror = function(e){
+		console.log('error',e);
+	}
+
+	socket.onclose = function(e){
+		console.log('close',e);
+	}
+
+</script>
+
+<script>
+	var button = document.querySelector("#myButton");
+	var lordIcon = button.querySelector(".accept-icon");
+
+	button.addEventListener("mouseenter", function () {
+		lordIcon.start();
+	});
+
+	button.addEventListener("mouseleave", function () {
+		lordIcon.stop();
+	});
+</script>
+
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script type="text/javascript" src="/static/js/arrangersList.js"></script>
+<script src="{% static 'js/main/answerComments.js' %}"></script>
+</body>
+</html>

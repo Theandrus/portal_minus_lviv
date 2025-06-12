@@ -1,0 +1,1383 @@
+{% load static %}
+{% load my_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>minus.lviv.ua</title>
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="/static/materialize/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- mycss -->
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+<!--    <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>-->
+    <script src="https://cdn.lordicon.com/lordicon-1.3.0.js"></script>
+
+    <!--  React application  -->
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="{% static 'js/main/userShorPage.js'  %}" type="text/babel"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const messagesContainer = document.querySelector('.scroll-messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        });
+    </script>
+
+</head>
+<body>
+
+<div class="profile_modal hide">
+    <div class="profile_modal__wrapper ">
+
+        <svg class="profile__modal__close" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="cancelIconTitle" stroke="#ffffff" stroke-width="0.5" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#000000"> <title id="cancelIconTitle">Cancel</title> <path d="M15.5355339 15.5355339L8.46446609 8.46446609M15.5355339 8.46446609L8.46446609 15.5355339"/> <path d="M4.92893219,19.0710678 C1.02368927,15.1658249 1.02368927,8.83417511 4.92893219,4.92893219 C8.83417511,1.02368927 15.1658249,1.02368927 19.0710678,4.92893219 C22.9763107,8.83417511 22.9763107,15.1658249 19.0710678,19.0710678 C15.1658249,22.9763107 8.83417511,22.9763107 4.92893219,19.0710678 Z"/> </svg>
+
+        <svg class="profile__modal__back__icon hide" viewBox="0 0 524 524" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+
+
+</defs>
+
+            <g id="Layer_x0020_1">
+
+<path class="fil0" d="M262 0c72,0 138,29 185,77 48,47 77,113 77,185 0,72 -29,138 -77,185 -47,48 -113,77 -185,77 -72,0 -138,-29 -185,-77 -48,-47 -77,-113 -77,-185 0,-72 29,-138 77,-185 47,-48 113,-77 185,-77zm177 85c-45,-45 -108,-73 -177,-73 -69,0 -132,28 -177,73 -45,45 -73,108 -73,177 0,69 28,132 73,177 45,45 108,73 177,73 69,0 132,-28 177,-73 45,-45 73,-108 73,-177 0,-69 -28,-132 -73,-177z" id="Curve_x0020_767"/>
+
+                <path class="fil0" d="M208 368c2,3 2,7 0,9 -3,2 -6,2 -9,0l-110 -111c-3,-2 -3,-6 0,-8l110 -111c3,-2 6,-2 9,0 2,2 2,6 0,9l-107 106 107 106z" id="Curve_x0020_456"/>
+
+                <path class="fil0" d="M93 268c-3,0 -6,-3 -6,-6 0,-3 3,-6 6,-6l338 0c3,0 6,3 6,6 0,3 -3,6 -6,6l-338 0z" id="Curve_x0020_45"/>
+
+</g>
+
+</svg>
+
+        <div class="profile_modal_main_content">
+            <div class="row" style="margin-top: 20px">
+                {% if user.is_authenticated %}
+                <div class="name_and_status col s7">
+                    <p style="font-size: 15px; color:  #6baf00;">{{ user.first_name }} {{ user.last_name }}</p>
+                    <span style="font-size: 15px; color:  #6baf00;">{% if user.is_staff %}Адміністратор {% else %} Користувач {% endif %}</span>
+                    <hr>
+
+
+                </div>
+                <div class="avatar_mini col s5">
+
+                </div>
+                <div class="urls col s12">
+                    <ul class="collection with-header" style="border-radius: 15px 15px 0 0; background-color: #282828">
+
+                        <li class="collection-item">
+                            <div class="profile-link">Профіль<a href="{% url 'user_page' pk=user.id %}"
+                                           class="secondary-content"><i
+                                    class="material-icons">send</i></a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="profile-link">Мінусовки<a
+                                    href="{% url 'userminuses' user_id=user.id %}"
+                                    class="secondary-content"><i class="material-icons">send</i></a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="profile-link">Записи<a href="{% url 'user_page' pk=user.id %}"
+                                          class="secondary-content"><i
+                                    class="material-icons">send</i></a>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="profile-link">Фото<a href="{% url 'user_album' pk=user.id %}"
+                                        class="secondary-content"><i
+                                    class="material-icons">send</i></a></div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="profile-link"><span>Друзі {% count_friend_request pk=user.id %}</span><a
+                                    href="{% url 'all_friends' pk=user.id %}"
+                                    class="secondary-content"><i class="material-icons">send</i></a>
+                            </div>
+                        </li>
+
+                        <li class="collection-item">
+                            <div class="profile-link">Заявки в друзі <a href="{% url 'user_friend_request'  %}"
+                                                   class="secondary-content"><i
+                                    class="material-icons">send</i></a></div>
+                        </li>
+
+                        {% if request.user.is_staff %}
+                        <li class="collection-item">
+                            <div class="profile-link">Повідомлення до модераторів <span style="color:red;">{% count_moderators_message %}</span><a
+                                    href="{% url 'moderator_messages'  %}"
+                                    class="secondary-content"><i class="material-icons">send</i></a>
+                            </div>
+                        </li>
+                        {% endif %}
+                        <li class="collection-item">
+                            <div class="profile-link">Оголошення<a href="{% url 'advertisement' %}"
+                                              class="secondary-content"><i
+                                    class="material-icons">send</i></a></div>
+                        </li>
+                        <li style="font-size:1.2em;">
+                            <div style="margin-right: 10px"><a href="{% url 'logout' %}"
+                                    class="secondary-content" style="color: #6baf00">Вихід</a></div>
+                        </li>
+                    </ul>
+                </div>
+                {% else %}
+                <div style="width: 80%; margin: auto">
+                    {% login %}
+
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="father_GOD">
+
+
+    <header>
+        <nav class="nav-extended">
+            <div class="nav-wrapper top_menu">
+                <a href="{% url 'main' %}"  class = "logo sidenav-trigger">
+                    <div class="logo__box" style="margin-left: 5px">
+                        <div class="gif2" id="gif3">
+                            <script>
+                                let animation3 = bodymovin.loadAnimation({
+
+                                    container: document.getElementById('gif3'),
+
+                                    path: '/static/img/9TwD831Q9y.json',
+
+                                    renderer: 'svg',
+
+                                    loop: true,
+
+                                    autoplay: true,
+
+                                    name: "charts",
+
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'main' %}" class="brand-logo" id="logo">
+                    <div class="logo__box">
+                        <div class="gif2" id="gif2">
+                            <script>
+                                let animation2 = bodymovin.loadAnimation({
+
+                                    container: document.getElementById('gif2'),
+
+                                    path: '/static/img/9TwD831Q9y.json',
+
+                                    renderer: 'svg',
+
+                                    loop: true,
+
+                                    autoplay: true,
+
+                                    name: "charts",
+
+                                });
+                            </script>
+                        </div>
+
+                        <div class="logo__content">
+                            <p class="logo_text">
+                                minus.lviv.ua
+                            </p>
+                            <p class="logo_text logo_text_custom ">
+                                українські мінусовки
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger" style="color:#6baf00;"></a> -->
+                <ul class="right nav_row">
+                    <lord-icon
+                            src="https://cdn.lordicon.com/vspbqszr.json"
+                            trigger="hover"
+                            colors="primary:#6baf00"
+                            style="width:30px;height:30px;margin-top: 5px;"
+                            class="notifications-inactive active">
+                    </lord-icon>
+                    <lord-icon
+                            src="https://cdn.lordicon.com/lznlxwtc.json"
+                            trigger="hover"
+                            style="width:30px;height:30px;margin-top: 5px;"
+                            colors="primary:#6baf00"
+                            class="notifications-active">
+                    </lord-icon>
+                    <lord-icon
+                            src="https://cdn.lordicon.com/fdxqrdfe.json"
+                            stroke="120"
+                            trigger="hover"
+                            colors="primary:#6baf00"
+                            style="width:30px;height:30px; margin-top: 5px;">
+                    </lord-icon>
+
+<!--                    <li><a href="{% url 'main' %}" class="top_menu_text">Новини</a></li>-->
+<!--                    <li><a href="{% url 'activities' %}" class="top_menu_text">Події</a></li>-->
+<!--                    <li><a href="{% url 'minusstore_main' %}" class="top_menu_text">Мінусовки</a></li>-->
+<!--                    <li><a href="{% url 'main_shop' %}" id="blurb" class="top_menu_text">Куплю/продам</a></li>-->
+<!--                    <li><a href="collapsible.html" class="top_menu_text">Форум</a></li>-->
+                    <li class="tabik"><a href="{% url 'minusstore_main' %}" >Мінусовки</a></li>
+                    <li class="tabik"><a href="{% url 'activities' %}" >Події</a></li>
+                    <li class="tabik"><a href="{% url 'main_shop' %}" id="blurb" >Куплю/продам</a></li>
+                    <li class="tabik"><a href="collapsible.html" >Форум</a></li>
+
+                    <li class="tabik tabik_more_options"><p class="tabik_more_options-text ">Більше</p>  <i class="material-icons tabik_more_options_icon">expand_more</i>
+                        <div class="tabik_dropdown ">
+                            <ul class="tabik_dropdown-list">
+                                <li class="tabik_dropdown-item "><a href="#" class="bmenu_a back_menu">Радіо</a></li>
+                                <li class="tabik_dropdown-item"><a href="{% url 'main' %}" >Новини</a></li>
+                                <li class="tabik_dropdown-item "><a target="_blank"
+                                                                    href="https://www.youtube.com/channel/UC8ZIZXC1LSM97_cZDMIFJvA"
+                                                                    class="bmenu_a back_menu">Youtube</a></li>
+
+                                <li class="tabik_dropdown-item "><a href="#" class="bmenu_a back_menu">Конкурс вокалістів</a></li>
+                                <li class="tabik_dropdown-item "><a href="{% url 'desk_of_respect' %}" class="bmenu_a back_menu">Дошка пошани</a>
+                                </li>
+                                <li class="tabik_dropdown-item "><a href="{% url 'desk_of_shame' %}" class="bmenu_a back_menu">Пауза користувача
+                                    <span style="color: #6baf00;"></span></a></li>
+                                <!--<li class="tabik "><a href="#" class="bmenu_a back_menu">FAQ</a></li>-->
+                                <!-- <li class="tabik "><a href="#" class="bmenu_a back_menu">Допомога </a></li> -->
+                                <li class="tabik_dropdown-item "><a href="{% url 'userlist' %}" class="bmenu_a back_menu">Користувачі</a></li>
+                                <li class="tabik_dropdown-item "><a href="{% url 'plusstore_main' %}" class="bmenu_a back_menu">Плюсовки</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                </ul>
+
+               <div class="nav-for-phone">
+                   <lord-icon
+                           src="https://cdn.lordicon.com/vspbqszr.json"
+                           trigger="hover"
+                           colors="primary:#6baf00"
+                           style="width:30px;height:30px">
+                   </lord-icon>
+                   <lord-icon
+                           src="https://cdn.lordicon.com/lznlxwtc.json"
+                           trigger="hover"
+                           style="width:30px;height:30px"
+                           colors="primary:#6baf00">
+                   </lord-icon>
+                   <lord-icon
+                           src="https://cdn.lordicon.com/fdxqrdfe.json"
+                           stroke="120"
+                           trigger="hover"
+                           colors="primary:#6baf00"
+                           style="width:30px;height:30px">
+                   </lord-icon>
+                   {% if user.is_authenticated %}
+                   {% if user.avatar %}
+                   <i class="material-icons"><img src="/static/{{ user.avatar }}" class="circle responsive-img" alt=""></i>
+                   {% else %}
+                   <a href="#" class="user-icon"><lord-icon
+                           src="https://cdn.lordicon.com/dxjqoygy.json"
+                           trigger="loop"
+                           stroke="120"
+                           colors="primary:#6baf00,secondary:#6baf00"
+                           style="width:30px;height:30px">
+                   </lord-icon>
+                   </a>
+                   {% endif %}
+                   {% else %}
+                   <lord-icon
+                           class="user-icon"
+                           src="https://cdn.lordicon.com/dxjqoygy.json"
+                           trigger="loop"
+                           stroke="120"
+                           colors="primary:#6baf00,secondary:#6baf00"
+                           style="width:30px;height:30px">
+                   </lord-icon>
+                   {% endif %}
+                   <div class="nav-content bottom_menu">
+                       <a href="#" data-target="mobile-demo" class="sidenav-trigger" style="color:#6baf00;text-align:center;">
+                           <i class="material-icons">menu</i>
+                       </a>
+                       <!--                                    {% if user.is_authenticated %}-->
+
+                       <!--                                    <ul class="login_menu">-->
+
+                       <!--                                        <li class="tabik green_li" style="background-color: #6baf00;color:white;"><a-->
+                       <!--                                                class="bmenu_a dropdown-trigger" href="#test2" style="color:white;" name="notifications"-->
+                       <!--                                                data-target='dropdown1'><i class="small material-icons">notifications</i></a></li>-->
+
+                       <!--                                    </ul>-->
+
+                       <!--                                    {% endif %}-->
+
+
+                   </div>
+               </div>
+
+            </div>
+
+
+
+        </nav>
+
+
+        <ul class="sidenav burger_menu" id="mobile-demo">
+
+            <li class="burger_menu_item "><a target="_blank" href="https://www.youtube.com/channel/UC8ZIZXC1LSM97_cZDMIFJvA"
+                                  class="bmenu_a back_menu">Youtube</a></li>
+            <li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">Facebook</a></li>
+            <li class="burger_menu_item "><a href="{% url 'desk_of_respect' %}" class="bmenu_a back_menu">Дошка пошани</a></li>
+            <li class="burger_menu_item "><a href="{% url 'desk_of_shame' %}" class="bmenu_a back_menu">Пауза користувача <span
+                    style="color:red;">4</span></a></li>
+            <li class="burger_menu_item "><a href="{% url 'userlist' %}" class="bmenu_a back_menu">Користувачі</a></li>
+            <li class="burger_menu_item "><a href="{% url 'plusstore_main' %}" class="bmenu_a back_menu">Плюсовки</a></li>
+            <!-- <li class="tabik "><a href="#" class="bmenu_a back_menu">Допомога </a></li> -->
+            <li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">Конкурс вокалістів</a></li>
+            <li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">Радіо</a></li>
+            <li class="burger_menu_item "><a href="#" class="bmenu_a back_menu">FAQ</a></li>
+
+        </ul>
+
+        <ul class="phone-main-btns">
+            <li class="phone-btn"><a href="{% url 'minusstore_main' %}" >Мінусовки</a></li>
+            <li class="phone-btn"><a href="{% url 'activities' %}" >Події</a></li>
+            <li class="phone-btn buy-sell"><a href="{% url 'main_shop' %}" ><span>Куплю/</span><span>продам</span></a></li>
+            <li class="phone-btn"><a href="collapsible.html" >Форум</a></li>
+            <li class="button-85"><a href="{% url 'rules' %}" ><span>Правила</span><span>порталу</span></a></li>
+        </ul>
+
+
+        <div class="notifications-dropdown">
+            <p style="font-size: 17px; font-weight: bold">Сповіщення</p>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-item">
+                <img src="/static/img/user.png" width="50px" height="50px">
+                <div class="chat-item-info">
+                    <div class="up-info">
+                        <span>Username</span>
+                        <span class="message-data">05.12.2023</span>
+                    </div>
+                    <div class="message-info">
+                        <div class="message-text">Нове повідомлення</div>
+                        <div class="new-message-count">2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </header>
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="right_block phone-v col col s12 m12 l3" style="position:relative">
+                <div class="row">
+                        <div class="collapsible collapsible_right">
+                            <div class="collapsible_item">
+                                <div class="collapsible-header tops">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/koyivthb.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    <a class="collapsible-header-link" href="{% url 'add_minus' %}">Завантажити
+                                        мінусовку</a>
+
+                                    <span class="badge"></span></div>
+                            </div>
+
+                            <div  class="collapsible_item account__controller">
+                                <div class="collapsible-header tops">
+                                    {% if user.is_authenticated %}
+                                    {% if user.avatar %}
+                                    <i class="material-icons"><img src="/static/{{ user.avatar }}" class="circle responsive-img" alt=""></i>{{ user.first_name }} {{ user.last_name }}
+                                    {% else %}
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/dxjqoygy.json"
+                                            trigger="loop"
+                                            stroke="120"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    {{ user.first_name }} {{ user.last_name }}
+                                    {% endif %}
+                                    {% else %}
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/dxjqoygy.json"
+                                            trigger="loop"
+                                            stroke="120"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Увійти
+                                    {% endif %}
+
+
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body">
+                                    <div class="row">
+                                        {% if user.is_authenticated %}
+                                        <div class="name_and_status col s7">
+                                            <p style="font-size: 15px; color:  #6baf00;">{{ user.first_name }} {{ user.last_name }}</p>
+                                            <span>{% if user.is_staff %}Адміністратор {% else %} Користувач {% endif %}</span>
+                                            <hr>
+
+
+                                        </div>
+                                        <div class="avatar_mini col s5">
+
+                                        </div>
+                                        <div class="urls col s12">
+                                            <ul class="collection with-header">
+
+                                                <li class="collection-item">
+                                                    <div>Профіль<a href="{% url 'user_page' pk=user.id %}"
+                                                                   class="secondary-content"><i
+                                                            class="material-icons">send</i></a>
+                                                    </div>
+                                                </li>
+                                                <li class="collection-item">
+                                                    <div>Мінусовки<a
+                                                            href="{% url 'userminuses' user_id=user.id %}"
+                                                            class="secondary-content"><i class="material-icons">send</i></a>
+                                                    </div>
+                                                </li>
+                                                <li class="collection-item">
+                                                    <div>Записи<a href="{% url 'user_page' pk=user.id %}"
+                                                                  class="secondary-content"><i
+                                                            class="material-icons">send</i></a>
+                                                    </div>
+                                                </li>
+                                                <li class="collection-item">
+                                                    <div>Фото<a href="{% url 'user_album' pk=user.id %}"
+                                                                class="secondary-content"><i
+                                                            class="material-icons">send</i></a></div>
+                                                </li>
+                                                <li class="collection-item">
+                                                    <div>Друзі <span >{% count_friend_request pk=user.id %}</span><a
+                                                            href="{% url 'all_friends' pk=user.id %}"
+                                                            class="secondary-content"><i class="material-icons">send</i></a>
+                                                    </div>
+                                                </li>
+
+                                                <li class="collection-item">
+                                                    <div>Заявки в друзі <a href="{% url 'user_friend_request'  %}"
+                                                                           class="secondary-content"><i
+                                                            class="material-icons">send</i></a></div>
+                                                </li>
+
+                                                {% if request.user.is_staff %}
+                                                <li class="collection-item">
+                                                    <div>Повідомлення до модераторів <span style="color:red;">{% count_moderators_message %}</span><a
+                                                            href="{% url 'moderator_messages'  %}"
+                                                            class="secondary-content"><i class="material-icons">send</i></a>
+                                                    </div>
+                                                </li>
+                                                {% endif %}
+                                                <li class="collection-item">
+                                                    <div>Оголошення<a href="{% url 'advertisement' %}"
+                                                                      class="secondary-content"><i
+                                                            class="material-icons">send</i></a></div>
+                                                </li>
+                                                <li style="font-size:1.2em;">
+                                                    <div><a href="{% url 'logout' %}"
+                                                            class="secondary-content">Вихід</a></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        {% else %}
+                                        {% login %}
+
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="collapsible_item">
+                                <div class="collapsible-header tops active">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/kbtmbyzy.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            state="loop"
+                                            stroke=120
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Файли які очікують підтвердження
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% new_m %}
+                                </div>
+                            </div>
+                            <div class="collapsible_item ">
+                                <div class="collapsible-header tops">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/vnxmkidq.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Поповнення файлів Українські мінусовки
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% last_minuses %}
+                                    <br>
+
+                                    <span style="display:block;width:100%;text-align:center;"><a
+                                            href="{% url 'all-minuses-by-date' %}" style="color:#6baf00;">Мiнусовки по датам</a></span>
+                                    <br>
+                                </div>
+                            </div>
+
+
+                            <div class="collapsible_item files">
+                                <div class="collapsible-header tops active">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/vnxmkidq.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Поповнення файлів Інші записи
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% last_minuses_another %}
+                                    <br>
+
+                                    <span style="display:block;width:100%;text-align:center;"><a
+                                            href="{% url 'all-minuses-by-date' %}" style="color:#6baf00;">Мiнусовки по датам</a></span>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="main_content" style="position:relative">
+
+            </div>
+
+            <!-- Ліва паннель  -->
+
+            <div class="left_block col s12 m12 l3 ">
+                <div class="row">
+                    <div class="collapsible collapsible_left">
+                        <div class="collapsible_item ">
+                            <div class="collapsible-header tops">
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/yyecauzv.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                <a class="collapsible-header-link" href="{% url 'rules' %}">Статут та правила
+                                    порталу</a>
+
+                            </div>
+                        </div>
+                        <div class="collapsible_item ">
+                            <div class="collapsible-header tops">
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/gqdnbnwt.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Топ завантажень
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body">
+                                {% minus_per_all_time %}
+                                <!-- 		    	{% for m_a in minus_top_all_time %}
+                                                    <div>
+
+                                                        <h6>{{ m_a.title }}</h6>
+                                                    </div>
+                                                {% endfor %} -->
+                            </div>
+                        </div>
+                        <div class="collapsible_item ">
+                            <div class="collapsible-header tops">
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/hciqteio.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Топ за рік
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body">
+                                {% minus_per_week %}
+                            </div>
+                        </div>
+                        <div class="collapsible_item month-top ">
+                            <div class="collapsible-header tops">
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/mmspidej.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Топ за місяць
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body">
+                                {% minus_per_week %}
+
+                            </div>
+                        </div>
+                        <div class="collapsible_item ">
+                            <div class="collapsible-header tops">
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/apuwlldu.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Топ за тиждень
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body">
+                                {% minus_per_week %}
+
+                            </div>
+                        </div>
+
+                        <div class="collapsible_item">
+                            <div class="collapsible-header tops">
+                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+<!--                                <lord-icon-->
+<!--                                        src="https://cdn.lordicon.com/zzcjjxew.json"-->
+<!--                                        trigger="loop"-->
+<!--                                        colors="primary:#6baf00,secondary:#6baf00"-->
+<!--                                        stroke="100"-->
+<!--                                        style="width:30px;height:30px">-->
+<!--                                </lord-icon>-->
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/ntformof.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Топ користувачів
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="col  header_of_rate" style="float:left;"><p>Користувач</p></div>
+                                    <div class="col  header_of_rate" style="float:right;"><p>Рейтинг</p></div>
+                                    <br>
+                                    {% top_u %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="left_banner" align="center">
+                            {% autoescape off %}{% left_banner %}{% endautoescape %}
+
+                        </div>
+                        {% if request.user.is_authenticated %}
+                        <div class="collapsible">
+                            <div class="collapsible_item">
+                                <div class="collapsible-header tops active">
+                                    <i class="material-icons left">access_time</i>
+                                    Файли з моменту вашого останнього вiдвiдування
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% last_minuses_for_user user_id=request.user.id %}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="cal__container collapsible_item ">
+                            <table class="cal" id="archivOfMinuses">
+                                <caption>
+                                    Архів мінусовок
+                                    <!-- January 2012 -->
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>Mon</th>
+                                    <th>Tue</th>
+                                    <th>Wed</th>
+                                    <th>Thu</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
+                                    <th>Sun</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+                                <tr>
+                                    <td><a href="{% url 'archiv_of_minuses' day=1 %}">1</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=2 %}">2</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=3 %}">3</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=4 %}">4</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=5 %}">5</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=6 %}">6</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=7 %}">7</a></td>
+
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'archiv_of_minuses' day=8 %}">8</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=9 %}">9</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=10 %}">10</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=11 %}">11</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=12 %}">12</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=13 %}">13</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=14 %}">14</a></td>
+
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'archiv_of_minuses' day=15 %}">15</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=16 %}">16</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=17 %}">17</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=18 %}">18</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=19 %}">19</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=20 %}">20</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=21 %}">21</a></td>
+
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'archiv_of_minuses' day=22 %}">22</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=23 %}">23</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=24 %}">24</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=25 %}">25</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=26 %}">26</a></td>
+                                    <td><a href="{%  url 'archiv_of_minuses' day=27 %}">27</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=28 %}">28</a></td>
+
+                                </tr>
+                                <tr>
+                                    <td><a href="{% url 'archiv_of_minuses' day=29 %}">29</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=30 %}">30</a></td>
+                                    <td><a href="{% url 'archiv_of_minuses' day=31 %}">31</a></td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {% endif %}
+                        <div class="collapsible_item active last-messages">
+                            <div class="collapsible-header tops">
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/zpxybbhl.json"
+                                        trigger="loop"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        stroke="100"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Останні повідомлення на форумі
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body last_forum">
+                                {% last_f %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Центральна панель -->
+
+            <div class = "central-panel">
+
+                {% block content %}
+
+                {% endblock %}
+
+
+
+<!--                <section class="user-list col s6">-->
+<!--                    <div class="row">-->
+<!--&lt;!&ndash;                        <form class="col s12" method="GET" action="{% url 'user_search' %}">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div class="input-field col s12" >&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <i class="material-icons prefix">search</i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <input id="icon_prefix" type="text" class="validate user_search" name="search">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label for="icon_prefix">Пошук користувачів</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    &lt;!&ndash; <input type="submit"  style="display:none;"> &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </form>&ndash;&gt;-->
+
+
+<!--                        <div class="authors col s12 m10 offset-m1 list">-->
+<!--                            <div class="row">-->
+<!--                                <h3>Аранжувальники</h3>-->
+
+<!--                                {% for u in users %}-->
+<!--                                <div class="col s12">-->
+<!--                                    <ul class="collection">-->
+<!--                                        <li class="collection-item avatar">-->
+<!--                                            <div class="avatar-box">-->
+<!--                                                <img src="/static/{% avatar pk=u.id %}" alt="" class="circle">-->
+<!--                                                <div class="strip" style=""><span style="color: black !important">Ексклюзивний</span></div>-->
+<!--                                            </div>-->
+<!--                                            <div>-->
+<!--                                                <span class="title" style="color:#9ACD32;">{{ u.username }}</span>-->
+<!--                                                <p style="color: #6baf00">Аранжувальник</p>-->
+<!--                                                <p style="font-weight: bold;">{{ u.first_name }} {{ u.last_name }} <br>-->
+<!--                                                    {{ u.email }}-->
+<!--                                                </p>-->
+<!--                                            </div>-->
+<!--                                            <a href="{% url 'user_page' pk=u.id %}" class="secondary-content"><i class="material-icons">send</i></a>-->
+<!--                                        </li>-->
+
+<!--                                    </ul>-->
+
+<!--                                </div>-->
+<!--                                {% endfor %}-->
+<!--                                <div class="pagination">-->
+<!--					<span class="step-links">-->
+<!--							{% if users.has_previous %}-->
+<!--								<a href="?page={{ users.previous_page_number }}">Попередня сторінка</a>-->
+<!--							{% endif %}-->
+<!--							<span class="current">-->
+<!--									Сторінка {{ users.number }} з {{ users.paginator.num_pages }}.-->
+<!--							</span>-->
+<!--							{% if users.has_next %}-->
+<!--								<a href="?page={{ users.next_page_number }}">Наступна сторінка</a>-->
+<!--							{% endif %}-->
+<!--					</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+
+            </div>
+
+
+
+            <!-- Права панель -->
+            <div class="right_block col col s12 m12 l3" id="rightBlock">
+                <div class="row">
+                    <div class="new-files col s12">
+                        <div class="collapsible collapsible_right ">
+                            <div class="collapsible_item desktop">
+                                <div class="collapsible-header tops">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/koyivthb.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    <a class="collapsible-header-link" href="{% url 'add_minus' %}">Завантажити
+                                        мінусовку</a>
+
+                                    <span class="badge"></span></div>
+                            </div>
+
+                            <div  class="collapsible_item account__controller desktop" id="profile-extended">
+                            <div class="collapsible-header tops">
+                                {% if user.is_authenticated %}
+                                {% if user.avatar %}
+                                <i class="material-icons"><img src="/static/{{ user.avatar }}" class="circle responsive-img" alt=""></i>{{ user.first_name }} {{ user.last_name }}
+                                {% else %}
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/dxjqoygy.json"
+                                        trigger="loop"
+                                        stroke="120"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                {{ user.first_name }} {{ user.last_name }}
+                                {% endif %}
+                                {% else %}
+                                <lord-icon
+                                        src="https://cdn.lordicon.com/dxjqoygy.json"
+                                        trigger="loop"
+                                        stroke="120"
+                                        colors="primary:#6baf00,secondary:#6baf00"
+                                        style="width:30px;height:30px">
+                                </lord-icon>
+                                Увійти
+                                {% endif %}
+
+
+                                <span class="badge"></span></div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    {% if user.is_authenticated %}
+                                    <div class="name_and_status col s7">
+                                        <p style="font-size: 15px; color:  #6baf00;">{{ user.first_name }} {{ user.last_name }}</p>
+                                        <span>{% if user.is_staff %}Адміністратор {% else %} Користувач {% endif %}</span>
+                                        <hr>
+
+
+                                    </div>
+                                    <div class="avatar_mini col s5">
+
+                                    </div>
+                                    <div class="urls col s12">
+                                        <ul class="collection with-header">
+
+                                            <li class="collection-item">
+                                                <div class="profile-link">Профіль<a href="{% url 'user_page' pk=user.id %}"
+                                                               class="secondary-content"><i
+                                                        class="material-icons">send</i></a>
+                                                </div>
+                                            </li>
+                                            <li class="collection-item">
+                                                <div class="profile-link">Мінусовки<a
+                                                        href="{% url 'userminuses' user_id=user.id %}"
+                                                        class="secondary-content"><i class="material-icons">send</i></a>
+                                                </div>
+                                            </li>
+                                            <li class="collection-item">
+                                                <div class="profile-link">Записи<a href="{% url 'user_page' pk=user.id %}"
+                                                              class="secondary-content"><i
+                                                        class="material-icons">send</i></a>
+                                                </div>
+                                            </li>
+                                            <li class="collection-item">
+                                                <div class="profile-link">Фото<a href="{% url 'user_album' pk=user.id %}"
+                                                            class="secondary-content"><i
+                                                        class="material-icons">send</i></a></div>
+                                            </li>
+                                            <li class="collection-item">
+                                                <div class="profile-link">Друзі <span >{% count_friend_request pk=user.id %}</span><a
+                                                        href="{% url 'all_friends' pk=user.id %}"
+                                                        class="secondary-content"><i class="material-icons">send</i></a>
+                                                </div>
+                                            </li>
+
+                                            <li class="collection-item">
+                                                <div class="profile-link">Заявки в друзі <a href="{% url 'user_friend_request'  %}"
+                                                                       class="secondary-content"><i
+                                                        class="material-icons">send</i></a></div>
+                                            </li>
+
+                                            {% if request.user.is_staff %}
+                                            <li class="collection-item">
+                                                <div class="profile-link">Повідомлення до модераторів <span style="color:red;">{% count_moderators_message %}</span><a
+                                                        href="{% url 'moderator_messages'  %}"
+                                                        class="secondary-content"><i class="material-icons">send</i></a>
+                                                </div>
+                                            </li>
+                                            {% endif %}
+                                            <li class="collection-item">
+                                                <div class="profile-link">Оголошення<a href="{% url 'advertisement' %}"
+                                                                  class="secondary-content"><i
+                                                        class="material-icons">send</i></a></div>
+                                            </li>
+                                            <li style="font-size:1.2em;">
+                                                <div><a href="{% url 'logout' %}"
+                                                        class="secondary-content">Вихід</a></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    {% else %}
+                                    {% login %}
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                            </div>
+
+
+
+                            <div class="collapsible_item desktop">
+                                <div class="collapsible-header tops active">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/kbtmbyzy.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            state="loop"
+                                            stroke=120
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Файли які очікують підтвердження
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% new_m %}
+                                </div>
+                            </div>
+                            <div class="collapsible_item desktop">
+                                <div class="collapsible-header tops active">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/vnxmkidq.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Поповнення файлів Українські мінусовки
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% last_minuses %}
+                                    <br>
+
+                                    <span style="display:block;width:100%;text-align:center;"><a
+                                            href="{% url 'all-minuses-by-date' %}" style="color:#6baf00;">Мiнусовки по датам</a></span>
+                                    <br>
+                                </div>
+                            </div>
+
+
+                            <div class="collapsible_item active files desktop">
+                                <div class="collapsible-header tops active">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/vnxmkidq.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Поповнення файлів Інші записи
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body new_minuses">
+                                    {% last_minuses_another %}
+                                    <br>
+
+                                    <span style="display:block;width:100%;text-align:center;"><a
+                                            href="{% url 'all-minuses-by-date' %}" style="color:#6baf00;">Мiнусовки по датам</a></span>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="right_banner" align="center">
+                                {% autoescape off %}{% right_banner %}{% endautoescape %}
+
+                            </div>
+                            <div class="collapsible_item active last-comments">
+                                <div class="collapsible-header tops active ">
+                                    <lord-icon
+                                            src="https://cdn.lordicon.com/zpxybbhl.json"
+                                            trigger="loop"
+                                            colors="primary:#6baf00,secondary:#6baf00"
+                                            stroke="100"
+                                            style="width:30px;height:30px">
+                                    </lord-icon>
+                                    Останні коментарі
+                                    <span class="badge"></span></div>
+                                <div class="collapsible-body last_forum">
+                                    {% last_c %}
+                                </div>
+                            </div>
+                            <div class="collapsible_item ">
+                                {% user_online %}
+                            </div>
+                            {% if user.is_authenticated %}
+                            <div class="collapsible_item">
+                                <a class="collapsible-header tops" href="{% url 'subscribe' %}">
+                                    <!-- <i class="material-icons left">add</i> -->Підписатись на оновлення файлів</a>
+                            </div>
+
+                            {% endif %}
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="page-footer">
+        <div class="container ">
+            <div class="footer__row">
+                <div class="footer__item">
+                    <div class="logo__box">
+                        <div class="gif2" id="gif1">
+
+                            <script>
+                                let animation1 = bodymovin.loadAnimation({
+
+                                    container: document.getElementById('gif1'),
+
+                                    path: '/static/img/9TwD831Q9y.json',
+
+                                    renderer: 'svg',
+
+                                    loop: true,
+
+                                    autoplay: true,
+
+                                    name: "charts1",
+
+                                });
+                            </script>
+
+                        </div>
+
+                        <div class="logo__content">
+                            <p class="logo_text">
+                                minus.lviv.ua
+                            </p>
+                            <p class="logo_text logo_text_custom ">
+                                українські мінусовки
+                            </p>
+                        </div>
+                    </div>
+                    <div class="footer__social__link">
+                        <svg fill="#6baf00" class="footer__social__icon" viewBox="0 -4 32 32"
+                             xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+                            <path d="M30.722,20.579 C30.137,21.894 28.628,23.085 27.211,23.348 C27.066,23.375 23.603,24.000 16.010,24.000 L15.990,24.000 C8.398,24.000 4.932,23.375 4.788,23.349 C3.371,23.085 1.861,21.894 1.275,20.578 C1.223,20.461 0.001,17.647 0.001,12.000 C0.001,6.353 1.223,3.538 1.275,3.421 C1.861,2.105 3.371,0.915 4.788,0.652 C4.932,0.625 8.398,-0.000 15.990,-0.000 C23.603,-0.000 27.066,0.625 27.210,0.651 C28.628,0.915 30.137,2.105 30.723,3.420 C30.775,3.538 32.000,6.353 32.000,12.000 C32.000,17.647 30.775,20.461 30.722,20.579 ZM28.893,4.230 C28.581,3.529 27.603,2.759 26.845,2.618 C26.813,2.612 23.386,2.000 16.010,2.000 C8.615,2.000 5.185,2.612 5.152,2.618 C4.394,2.759 3.417,3.529 3.104,4.234 C3.094,4.255 2.002,6.829 2.002,12.000 C2.002,17.170 3.094,19.744 3.106,19.770 C3.417,20.471 4.394,21.241 5.153,21.382 C5.185,21.388 8.615,22.000 15.990,22.000 L16.010,22.000 C23.386,22.000 26.813,21.388 26.846,21.382 C27.604,21.241 28.581,20.471 28.894,19.766 C28.904,19.744 29.998,17.170 29.998,12.000 C29.998,6.830 28.904,4.255 28.893,4.230 ZM13.541,17.846 C13.379,17.949 13.193,18.000 13.008,18.000 C12.842,18.000 12.676,17.959 12.525,17.875 C12.206,17.699 12.008,17.364 12.008,17.000 L12.008,7.000 C12.008,6.637 12.204,6.303 12.521,6.127 C12.838,5.950 13.227,5.958 13.534,6.149 L21.553,11.105 C21.846,11.286 22.026,11.606 22.027,11.951 C22.028,12.296 21.852,12.618 21.560,12.801 L13.541,17.846 ZM14.009,8.794 L14.009,15.189 L19.137,11.963 L14.009,8.794 Z"/>
+                        </svg>
+                        <svg class="footer__social__icon" viewBox="0 -0.5 25 25" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z"
+                                  stroke="#6baf00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z"
+                                  stroke="#6baf00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)"
+                                  fill="#6baf00"/>
+                            <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)"
+                                  stroke="#6baf00" stroke-linecap="round"/>
+                        </svg>
+                        <svg class="footer__social__icon" viewBox="0 0 24 24" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H15V13.9999H17.0762C17.5066 13.9999 17.8887 13.7245 18.0249 13.3161L18.4679 11.9871C18.6298 11.5014 18.2683 10.9999 17.7564 10.9999H15V8.99992C15 8.49992 15.5 7.99992 16 7.99992H18C18.5523 7.99992 19 7.5522 19 6.99992V6.31393C19 5.99091 18.7937 5.7013 18.4813 5.61887C17.1705 5.27295 16 5.27295 16 5.27295C13.5 5.27295 12 6.99992 12 8.49992V10.9999H10C9.44772 10.9999 9 11.4476 9 11.9999V12.9999C9 13.5522 9.44771 13.9999 10 13.9999H12V21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20Z"
+                                  fill="#6baf00"/>
+                        </svg>
+                    </div>
+                </div>
+
+
+                <div class="footer__item">
+                    <h5 class="white-text">Головні посилання</h5>
+                    <div class="footer__link__row">
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Новини</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Події</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Мінусовки</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Куплю/продам</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!"> Форум</a></li>
+                        </ul>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Youtube</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Радіо</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Конкурс вокалістів</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Дошка пошани</a></li>
+
+                        </ul>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Пауза користувача </a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Дошка пошани</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Користувачі </a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Дошка пошани</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Плюсовки </a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-copyright" id="footer">
+            <p>
+                Усі мінусовки викладені лише для ознайомлення. © 2023 Українські мінусовки на minus.lviv.ua. Всі права
+                захищено.
+
+            </p>
+
+        </div>
+    </footer>
+</div>
+
+
+</div>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<!-- materialize_js	 -->
+
+<script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+<script  src="{% static 'js/adaptivePhone.js' %}"></script>
+<!--<script>-->
+
+<!--    var loc = window.location;-->
+<!--    var wsStart = 'ws://';-->
+<!--    if (loc.protocol === 'https:') {-->
+<!--        wsStart = 'wss://';-->
+<!--    }-->
+<!--    var request_user = {{ request.user.id }};-->
+<!--    var endpoint = wsStart + '127.0.0.1:8000/' + { %-->
+<!--    if request.user.is_authenticated %}-->
+<!--    {-->
+<!--        {-->
+<!--            request.user.id-->
+<!--        }-->
+<!--    }-->
+<!--    {% else %-->
+<!--    }-->
+<!--    'None'-->
+<!--    {%-->
+<!--        endif %-->
+<!--    }-->
+<!--    +'/';-->
+
+<!--    console.log(endpoint);-->
+<!--    var liveuser_socket = new WebSocket(endpoint);-->
+<!--    console.log(liveuser_socket);-->
+<!--    liveuser_socket.onmessage = function (e) {-->
+<!--        console.log('jej');-->
+<!--        var data = JSON.parse(e.data);-->
+<!--        console.log(JSON.parse(data['json_data'])[0]);-->
+<!--        json_data = JSON.parse(data['json_data']);-->
+<!--        if (json_data) {-->
+<!--            console.log(e.data);-->
+
+
+<!--            var from_user = json_data[0]['fields']['frm_user'];-->
+<!--            console.log('kl');-->
+<!--            $('.alarm_m').empty();-->
+<!--            $('.alarm_m').append('<span style="color:red;font-weight:bold;font-size:1.5em;">!</span>');-->
+
+
+<!--        } else {-->
+<!--            var message = data['message'];-->
+<!--            var user = data['user'];-->
+
+<!--            $('#chat_window_messages').append('<div class="left_message col m12"><div class="left z-depth-1 col m6"><p class="message_text">' + message.text + '</p></div></div>');-->
+<!--        }-->
+<!--    }-->
+<!--    liveuser_socket.onopen = function (e) {-->
+<!--        console.log('open', e);-->
+<!--    }-->
+
+<!--    liveuser_socket.onerror = function (e) {-->
+<!--        console.log('error', e);-->
+<!--        var liveuser_socket = new WebSocket(endpoint);-->
+<!--    }-->
+
+<!--    liveuser_socket.onclose = function (e) {-->
+<!--        console.log('close', e);-->
+<!--        // var liveuser_socket = new WebSocket(endpoint);-->
+<!--    }-->
+
+<!--</script>-->
+<script type="text/javascript" src="/static/js/collapsibleShow.js"></script>
+<script type="text/javascript" src="/static/js/profileModal.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="/static/js/notifications.js"></script>
+<!--<script src="/static/js/search.js/"></script>-->
+<!--<script src="/static/js/main/answerComments.js/"></script>-->
+<!---->
+{% block script %}
+{% endblock %}
+
+
+</body>
+</html>

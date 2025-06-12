@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<form class="col s11 offset-s1 reg" method="POST">
+			{% csrf_token %}
+			<h2>Додайте товар</h2>
+
+			{{ form.as_p }}
+			<br>
+			<!-- <div class="input-field col s12 select_category">
+				 <select name="category">
+					 <option value="" disabled selected>Виберіть категорію</option>
+					 <optgroup label="Звукове обладнання">
+						 <option value="1">Акустичні системи</option>
+						 <option value="2">Підсилювачі</option>
+						 <option value="3">Мікшерні пульти</option>
+						 <option value="4">Мікрофони</option>
+						 <option value="5">Прилади обробки звуку</option>
+						 <option value="6">Стійки,реки,чохли</option>
+						 <option value="7">Комутація</option>
+						 <option value="8">Інше звукове начиння</option>
+					 </optgroup>
+						<optgroup label="Світлове обладнання">
+						 <option value="9">Рухомі голови</option>
+						 <option value="10">Сканери</option>
+						 <option value="11">Заливаючи пари</option>
+						 <option value="12">Лазери</option>
+						 <option value="13">Дискоефекти</option>
+						 <option value="14">Стробоскопи</option>
+						 <option value="15">Спец. ефекти</option>
+						 <option value="16">Прилади керування світлом</option>
+						 <option value="17">Ферми,лебідки,стійки</option>
+						 <option value="18">Інше світлове начиння</option>
+					 </optgroup>
+						<optgroup label="Студійне обладнання">
+						 <option value="19">Студійні монітори</option>
+						 <option value="20">Студійні підсилювачі</option>
+						 <option value="21">Навушники</option>
+						 <option value="22">Звукові інтерфейси(карти)</option>
+						 <option value="23">Студійні мікрофони</option>
+						 <option value="24">Студійні преампи</option>
+						 <option value="25">Міді клавіатури/контроллери</option>
+						 <option value="26">Студійний софт</option>
+						 <option value="27">Інше студійне начиння</option>
+					 </optgroup>
+						<optgroup label="Музичні інструменти">
+						 <option value="25">Гітари</option>
+						 <option value="26">Клавішні інструменти</option>
+						 <option value="27">Ударні інструменти</option>
+						 <option value="28">Духові інструменти</option>
+						 <option value="29">Народні інструменти</option>
+						 <option value="30">Струнно-смичкові</option>
+						 <option value="31">Комбопідсилювачі</option>
+						 <option value="32">Аксесуари</option>
+					 </optgroup>
+
+				 </select>
+
+		 </div> -->
+
+			<button type="submit" class="sbm_auth waves-effect waves-light btn-large col s12">Увійти</button>
+
+		</form>
+
+	</div>
+</section>
+{% endblock %}

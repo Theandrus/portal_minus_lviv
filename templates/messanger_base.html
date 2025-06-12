@@ -1,0 +1,156 @@
+{% load static %}
+{% load my_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<title>minus.lviv.ua</title>
+	<!-- Materialize -->
+	<link rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}">
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- mycss -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/messanger.css' %}">
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="user-panel col s3" id="userPanel"></div>
+
+
+
+	</div>
+</div>
+
+<script src="{% static 'js/dist/bundle.js' %}"></script>
+
+<!--<script>-->
+<!--	var loc = window.location;-->
+<!--	var wsStart = 'ws://';-->
+<!--	if (loc.protocol === 'https:'){-->
+<!--		wsStart = 'wss://';-->
+<!--	}-->
+<!--	// var request_user = {{ request.user.id }};-->
+<!--	var endpoint = wsStart + '127.0.0.1:8000/'+ {{ request.user.id }} + '/';-->
+<!--	console.log(endpoint);-->
+<!--	var liveuser_socket = new WebSocket(endpoint);-->
+<!--	console.log(liveuser_socket);-->
+<!--	liveuser_socket.onmessage = function(e){-->
+<!--		console.log('jej');-->
+<!--		var data = JSON.parse(e.data);-->
+<!--		var message = data['message'];-->
+<!--		var user = data['user'];-->
+<!--		console.log(message);-->
+<!--		console.log(message.text);-->
+<!--	$('#chat_window_messages').append('<div class="left_message col m12"><div class="left z-depth-1 col m6"><p class="message_text">'+ message.text+'</p></div></div>');-->
+<!--		console.log('vono proxodit');-->
+<!--		var block = document.getElementById("chat_window_messages");-->
+<!--		block.scrollTop = block.scrollHeight;-->
+<!--		// console.log(JSON.parse(data['json_data'])[0]);-->
+<!--		json_data = JSON.parse(data['json_data']);-->
+<!--		if (json_data){-->
+<!--			console.log(e.data);-->
+<!--			const ids = document.getElementsByClassName('id');-->
+<!--			for (let i = 0; i < ids.length; i++ ) {-->
+<!--				var id = ids[i].getAttribute('data-id');-->
+<!--				var from_user = json_data[0]['fields']['frm_user'];-->
+<!--				// console.log(from_user);-->
+<!--				// console.log(id);-->
+<!--				if (id==from_user){-->
+<!--					console.log('kl');-->
+<!--					$('.l'+id).append('<p><span id="new_message_count" class="right new badge">!</span></p>');-->
+<!--				}-->
+
+
+<!--		}-->
+<!--}-->
+
+<!--}-->
+<!--	liveuser_socket.onopen = function(e){-->
+<!--		console.log('open',e);-->
+<!--	}-->
+
+<!--	liveuser_socket.onerror = function(e){-->
+<!--		console.log('error',e);-->
+<!--		var liveuser_socket = new WebSocket(endpoint);-->
+<!--	}-->
+
+<!--	liveuser_socket.onclose = function(e){-->
+<!--		console.log('close',e);-->
+<!--		// var liveuser_socket = new WebSocket(endpoint);-->
+<!--	}-->
+
+
+
+
+
+
+<!--	var messanger_endpoint = wsStart + '127.0.0.1:8000/messanger/'+{{ pk }} + '/' ;-->
+<!--	var messanger_websocket = new WebSocket(messanger_endpoint);-->
+<!--	console.log(messanger_endpoint);-->
+
+
+
+
+<!--	messanger_websocket.onmessage = function(e){-->
+<!--		var data = JSON.parse(e.data);-->
+<!--    var message = data['message'];-->
+<!--		var user = data['user'];-->
+<!--		console.log({{ request.user.id }});-->
+
+
+<!--		console.log('first2');-->
+
+<!--		var block = document.getElementById("chat_window_messages");-->
+<!--		block.scrollTop = block.scrollHeight;-->
+<!--		console.log('zbc');-->
+
+<!--	}-->
+
+<!--	messanger_websocket.onopen = function(e){-->
+<!--		console.log('messanger_open',e);-->
+<!--	}-->
+
+<!--	messanger_websocket.onerror = function(e){-->
+<!--		console.log('messanger_error',e);-->
+<!--	}-->
+
+<!--	messanger_websocket.onclose = function(e){-->
+<!--		console.log('messanger_close',e);-->
+<!--	}-->
+<!--	var message;-->
+<!--	$('.message').keyup(function(event){-->
+<!--			console.log(event.keyCode);-->
+<!--			if(event.keyCode === 13){-->
+<!--					event.preventDefault();-->
+<!--					message = $('.message').val();-->
+<!--					console.log(message);-->
+<!--					messanger_websocket.send(message);-->
+<!--					liveuser_socket.send(message);-->
+<!--					$('.message').val('');-->
+<!--					$('#chat_window_messages').append('<div class="right_message col m12"><div class="right z-depth-1 col m6 offset-m6"><p class="message_text">'+ message+'</p></div></div>');-->
+<!--					var block = document.getElementById("chat_window_messages");-->
+<!--					block.scrollTop = block.scrollHeight;-->
+
+<!--			}-->
+<!--	});-->
+<!--	$('#submit').on('click',function(event){-->
+<!--					message = $('.message').val();-->
+<!--					console.log(message);-->
+
+<!--					messanger_websocket.send(message);-->
+<!--					liveuser_socket.send(message);-->
+<!--					$('.message').val('');-->
+<!--					console.log('kek');-->
+<!--					$('#chat_window_messages').append('<div class="right_message col m12"><div class="right z-depth-1 col m6 offset-m6"><p class="message_text">'+ message+'</p></div></div>');-->
+<!--					var block = document.getElementById("chat_window_messages");-->
+<!--					block.scrollTop = block.scrollHeight;-->
+<!--					console.log('zbc');-->
+<!--			// }-->
+<!--	});-->
+<!--</script>-->
+</body>
+</html>

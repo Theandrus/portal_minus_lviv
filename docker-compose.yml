@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+
+  nginx:
+    build: ./web/nginx
+    volumes:
+      - .:/minus_lviv
+    ports:
+      - 1761:80
+    depends_on:
+      - web
+    networks:
+      - app
+
+  db:
+    image: mariadb:10.1.44
+    ports:
+      - '3314:3306'
+    environment:
+      MYSQL_DATABASE: 'minus_lviv'
+      MYSQL_ROOT: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - ./web/mariadb/data:/var/lib/mysql
+    networks:
+      - app
+
+  celery:
+    build:
+      dockerfile: ./web/docker/Dockerfile
+      context: ./
+    volumes:
+      - .:/minus_lviv
+    command: celery -A minus_lviv beat -l info
+    depends_on:
+      - web
+      - redis
+    networks:
+      - app
+
+  worker:
+    build:
+      dockerfile: ./web/docker/Dockerfile
+      context: ./
+    volumes:
+      - .:/minus_lviv
+    command: celery -A minus_lviv worker -l info
+    depends_on:
+      - web
+      - redis
+    links:
+      - celery
+    networks:
+      - app
+
+  redis:
+    image: "redis:alpine"
+    restart: always
+    networks:
+      - app
+
+  web:
+    build:
+      dockerfile: ./web/docker/Dockerfile
+      context: ./
+    command: gunicorn minus_lviv.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/minus_lviv
+    expose:
+      - 8000
+    networks:
+      - app
+    depends_on:
+      - db
+    links:
+      - db
+    restart: always
+
+
+networks:
+  app:
+    driver: bridge

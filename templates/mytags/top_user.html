@@ -1,0 +1,15 @@
+						{% for u in top_users %}
+							<div class="users_and_rate user" id="users_and_rate">
+								
+
+								<a href="{% url 'user_page' pk=u.user.id%}"  style="color:black;" class="u_rate">
+								<div class="name_rate  rating"><p>{{ u.user.first_name }} {{ u.user.last_name }} </p></div>
+								<div class="user_rating rating" style="color:#9ACD32;"><p>{{ u.rating }}</p></div>
+								<span style="display:none" id="user_id">{{ u.user.id }}</span>
+							</a>
+							<br>
+							</div>
+							
+
+
+				    	{% endfor %}

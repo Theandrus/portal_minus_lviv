@@ -1,0 +1,14 @@
+<form class="auth" method="POST" action="{% url 'signin' %}">
+	{% csrf_token %}
+	<h2 style="color: #9ACD32">Вхід</h2>
+	{{ form.as_p }}
+	<button type="submit" class="sbm_auth waves-effect waves-light btn-small">Увійти</button>
+
+</form>
+<script>
+	var el = document.querySelector('.auth input[name="password"]');
+	console.log(el);
+	el.setAttribute('type', 'password');
+</script>
+<div  class="" style="margin-bottom: 10px; margin-top: 10px;"><a style="color: #9ACD32;" href="{% url 'registration_page' %}">Можливо ви хочете зареєструватись?</a></div>
+<div  class=""><a style="color: #9ACD32" href="{% url 'password_reset' %}">Або можливо ви забули пароль?</a></div>

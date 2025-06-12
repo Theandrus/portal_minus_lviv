@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<form class="col s12" action="{% url  'minus-search' %}" method="GET">
+      		<div class="row">
+        		<div class="input-field col s12">
+          			<i class="material-icons prefix">search</i>
+          			<input id="icon_prefix" name="search" type="text" class="validate">
+          			<label for="icon_prefix">Пошук мінусовок</label>
+        		</div>
+
+      		</div>
+    	</form>
+
+
+		<div class="authors col s12 m10 offset-m1">
+			<div class="row">
+				{% if z %}
+					<h3>Мінусовки за {{ z }} </h3>
+				{% elif k %}
+					<h3>Мінусовки за вашим запитом </h3>
+                {% elif all_minuses %}
+                    <h3>Мiнусовки по датам</h3>
+				{% else %}
+					<h3>Мінусовки користувача</h3>
+				{% endif %}
+                {% if all_minuses %}
+
+				    {% for m in minus %}
+				    <div class="col s12" style="margin-bottom: 20px;">
+
+                        <span><b>{{ m.pub_date }}</b></span>
+					    <a href="{% url 'minus' pk=m.pk %}"><p style="color:#9ACD32;font-weight: bold;">{{ m.title }}</p></a>
+
+						<div class="custom-audio-player">
+							<div class="player-body">
+								<div class="player-controls-play">
+									<button class="player-play-btn"
+											role="button"
+											aria-label="Play"
+											data-playing="false"
+											data-audio="player-1"
+									>
+										<div class="player-icon-play">
+											<svg class="player-icon-play-icon" version="1.1"
+												 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+												 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+												 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+												 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="play-alt.svg"
+												 inkscape:version="0.48.4 r9939"
+												 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+												 viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<path fill="#6baf00" id="path16995" inkscape:connector-curvature="0" d="M600,1200C268.65,1200,0,931.35,0,600C0,268.65,268.65,0,600,0
+	c331.35,0,600,268.65,600,600C1200,931.35,931.35,1200,600,1200z M450,300.45v599.1L900,600L450,300.45z"/>
+</svg>
+										</div>
+										<div class="player-icon-pause hidden">
+
+											<svg class="player-icon-pause-icon" version="1.1"
+												 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+												 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+												 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+												 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="pause-alt.svg"
+												 inkscape:version="0.48.4 r9939"
+												 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+												 viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<path fill="#6baf00"  id="path15778" inkscape:connector-curvature="0" d="M600,0C268.629,0,0,268.629,0,600s268.629,600,600,600
+	s600-268.629,600-600S931.371,0,600,0z M330.835,289.38h181.714v621.24H330.835V289.38z M687.451,289.38h181.714v621.24H687.451
+	V289.38z"/>
+</svg>
+										</div>
+									</button>
+								</div>
+								<div class="player-controls">
+									<div class="player-timeline">
+										<div class="player-progress">
+											<div class="player-progress-filled">
+												<div class="player-progress-handle"></div>
+											</div>
+										</div>
+									</div>
+									<div class="player-volume-container">
+      <span class="icon-volume"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+									 class="bi bi-volume-down-fill" viewBox="0 0 16 16">
+  <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zm3.025 4a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
+</svg></span>
+										<input type="range" id="volume" min="0" max="1" value="1" step="0.01" class="player-volume"/>
+									</div>
+								</div>
+								<audio id="player-1" data-type="a"   src="/static/{{ m.file }}"  controlsList="nodownload"></audio>
+							</div>
+
+						</div>
+				    </div>
+
+				    {% endfor %}
+                {% else %}
+								<table class="responsive-table">
+				<thead>
+					<tr>
+							<th>Виконавець</th>
+							<th>Пісня</th>
+							<th>Тип файлу</th>
+							<th>Додано</th>
+							<th>Опції</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for m in minus %}
+					<tr>
+						<td>{{ m.author.name }}</td>
+						<td>{{ m.title }}</td>
+						<td>{% if m.type_id == 1 %}(Аудіо) {% elif m.type_id == 2 %}(Midi){% elif m.type_id == 3 %} (Ноти){% endif %}</td>
+						<td>{{ m.pub_date }}</td>
+						<td><audio src="/static/{{ m.file }}" width="20%"controls controlsList="nodownload"></audio></td>
+					</tr>
+					 {% endfor %}
+				</tbody>
+			</table>
+                {% endif %}
+        <div class="pagination">
+          <span class="step-links">
+              {% if minus.has_previous %}
+                <a href="?page={{ minus.previous_page_number }}">Попередня сторінка</a>
+              {% endif %}
+              <span class="current">
+                  Сторінка {{ minus.number }} з {{ minus.paginator.num_pages }}.
+              </span>
+              {% if minus.has_next %}
+                <a href="?page={{ minus.next_page_number }}">Наступна сторінка</a>
+              {% endif %}
+          </span>
+        </div>
+			</div>
+		</div>
+</div>
+</section>
+
+
+{% endblock %}

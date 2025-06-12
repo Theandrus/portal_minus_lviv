@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+    <div class="row">
+        <div class="header col s12 m10 offset-m1">
+            <div class="row">
+                <form class="col s11 offset-s1 reg" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- {{ form_add_minus.file.errors }} -->
+                    <!-- {{ form_add_minus.bitrate.errors }} -->
+                    <!-- {{ form_add_minus.title.errors }} -->
+                    <!-- {{ form_add_minus.author.errors }} -->
+                    <!-- {{ form_add_minus.lyrics.errors }} -->
+                    <!-- {{ form_add_minus.embed_video.errors }} -->
+                    <!-- {{ form_add_minus.length.errors }} -->
+                    <!-- {{ form_add_minus.user.errors }} -->
+                    {{ form_add_minus.errors }}
+
+                    <h2 style="color:#6baf00; ">Залийте мінусовку</h2>
+                    <label for="minus">Залийте мінус</label>
+                    <input type="file" name="file"><br>
+
+                    <br>
+                    <div class="add_minus_form_item">
+                        <label for="title">Назва мінусу</label>
+                        <input type="text" name="title" id="title" maxlength="255">
+                    </div>
+                    <div class="add_minus_form_item">
+                        <label for="author">Прізвище/Назва гурту</label>
+                      	<input type="text" name="surname" >
+                    </div>
+                    <div class="add_minus_form_item">
+                        <label for="author">Ім'я</label>
+                        <input type="text" name="name">
+                    </div>
+                    {% if user_arranger %}
+                    <div class="add_minus_form_item">
+                        <label>
+                            <input type="checkbox" id="add_minus_checkbox" name="subscribe">
+                            <span>Монетизована</span>
+                        </label>
+                    </div>
+                    <div class="add_minus_form_item">
+                        <label for="price">Ціна</label>
+                        <input type="text" id="price" name="price">
+                    </div>
+                    {% endif %}
+                    <div class="add_minus_form_item">
+                        <label for="lyrics">Текст пісні</label>
+                        <textarea name="lyrics" rows="8" cols="80"></textarea>
+                    </div>
+
+                    <div class="add_minus_form_item">
+                        <label for="embed_video">Посилання на відео</label>
+                        <!-- {{ form.embed_video }} -->
+                        <input type="text" name="embed_video"><br>
+                    </div>
+
+{#                    <!-- {{ form.author }} -->#}
+{##}
+{#                    <!-- {{ form.lyrics }} -->#}
+{##}
+{#                    <!-- {{ form.as_p }} -->#}
+                    <label for="plusrecord">Залийте плюс</label>
+                    <input type="file" name="plus"><br>
+{#                    <!-- {{ form.plusrecord }}<br> -->#}
+                    <br>
+                    <div class="add_minus_form_item">
+                    </div>
+
+                    <div class="input-field col s6 select_region">
+                        <select name="type">
+
+                            <option value="Всі">Всі</option>
+                            <option value="Аудіо">Аудіо</option>
+                            <option value="General MIDI">General MIDI</option>
+                            <option value="Ноти">Ноти</option>
+                        </select>
+                        <label>Тип</label>
+
+                    </div>
+                    <div class="input-field col s6 select_region">
+                        <select name="katalog">
+
+                            <option value="Все">Все</option>
+                            <optgroup label="Українські мінусовки">
+                                <option value="Авторськi">Авторськi</option>
+                                <option value="Оригiнал">Оригiнал</option>
+                                <option value="Оригiнал + бек">Оригiнал + бек</option>
+                                <option value="Студiйнi копiї">Студiйнi копiї</option>
+                                <option value="Задавки-нарiзки">Задавки-нарiзки</option>
+                                <option value="Українськi народнi">Українськi народнi</option>
+                            </optgroup>
+
+                            <optgroup label="Інструментальні">
+                                <option value="Iнструментальнi твори">Iнструментальнi твори</option>
+                                <option value="Лаунч музика(фонова)">Лаунч музика(фонова)</option>
+                                <option value="Мiнуси для iнстурментiв(сакс,гiтари,труба,акордеон та iн.)">Мiнуси для
+                                    iнстурментiв(сакс,гiтари,труба,акордеон та iн.)
+                                </option>
+                            </optgroup>
+                            <optgroup label="Iншi записи">
+                                <option value="Бiлоруськi">Бiлоруськi</option>
+                                <option value="Польськi">Польськi</option>
+                                <option value="Угорськi">Угорськi</option>
+                                <option value="Чешськi">Чешськi</option>
+                                <option value="Молдавськi">Молдавськi</option>
+                                <option value="Румунськi">Румунськi</option>
+                            </optgroup>
+                        </select>
+                        <label>Каталог</label>
+
+                    </div>
+                    <div class="input-field col s6 select_region">
+                        <select name="specifik">
+                            <option value="Естрадні">Естраднi</option>
+                            <option value="Класичні">Класичнi</option>
+                            <option value="Народні">Народнi</option>
+                            <option value="Ресторанні">Рестораннi</option>
+                            <option value="Пiсні про маму">Пiснi про маму</option>
+                            <option value="Пiсні про тата">Пiснi про тата</option>
+                            <option value="До дня Валентина">До дня Валентина</option>
+                            <option value="До дня народження">До дня народження</option>
+                            <option value="Випускні">Випускнi</option>
+                            <option value="Військово,повстанські">Вiйськово,повстанськi</option>
+                            <option value="До 8 березня">До 8 березня</option>
+                            <option value="Християнські">Християнсьki</option>
+                            <option value="Дитячі">Дитячi</option>
+                            <option value="Новорічні">Новорiчнi</option>
+                            <option value="На паску">На паску</option>
+                            <option value="Різдвяні">Різдвяні</option>
+                            <option value="Про школу">Про школу</option>
+                            <option value="Мюзiкли">Мюзікли,опери,балети</option>
+                            <option value="Спорт,туризм">Спорт,туризм</option>
+                            <option value="Пісні з мультфільмів">Пісні з мультфільмів</option>
+                            <option value="Пісні з кіно">Пісні з кіно</option>
+                            <option value="Пісні про професії">Пісні про професії</option>
+                            <option value="Про природу">Про природу</option>
+                            <option value="Про сім'ю,родину">Про сім'ю родину</option>
+                            <option value="Про кохання">Про кохання</option>
+                            <option value="Інше призначення">Інше призначення</option>
+                        </select>
+                        <label>Вибір за призначенням</label>
+
+                    </div>
+                    <div class="input-field col s6 select_region">
+                        <select name="genre">
+
+                            <option value="POP">POP</option>
+                            <option value="ROCK">ROCK</option>
+                            <option value="ROCK&ROLL">ROCK&ROLL</option>
+                            <option value="Acoustic">Acoustic</option>
+                            <option value="Latin">Latin</option>
+                            <option value="Bossa nova">Bossa nova</option>
+                            <option value="Blues">Blues</option>
+                            <option value="Ballad">Ballad</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Country">Country</option>
+                            <option value="Dance">Dance</option>
+                            <option value="Transe">Transe</option>
+                            <option value="Hous">Hous</option>
+                            <option value="Techno">Techno</option>
+                            <option value="Disco">Disco</option>
+                            <option value="Folk">Folk</option>
+                            <option value="Funk">Funk</option>
+                            <option value="Metall">Metall</option>
+                            <option value="Punk">Punk</option>
+                            <option value="R&B">R&B</option>
+                            <option value="Rap\Hip-hop">Rap\Hip-hop</option>
+                            <option value="Waltz">Waltz</option>
+                            <option value="Marsh">Marsh</option>
+                            <option value="Tango">Tango</option>
+                            <option value="Foxtrot">Foxtrot</option>
+                            <option value="Інші жанри">Інші жанри</option>
+                        </select>
+                        <label>Вибір за жанром</label>
+
+                    </div>
+                    <!--							<div class="input-field  ">-->
+                    <!--							 <label>-->
+                    <!--										 <input type="checkbox" checked="checked" />-->
+                    <!--										 <span>З правилами порталу ознайомлений</span>-->
+                    <!--								 </label>-->
+                    <!--							</div>-->
+                    <button type="submit" class="sbm_auth waves-effect waves-light btn-large col s12">Залити мінусовку
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+{% endblock %}

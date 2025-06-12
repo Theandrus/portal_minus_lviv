@@ -1,0 +1,5 @@
+  {% if count_new_messages %}
+    <li class="tabik green_li" style="background-color: #6baf00;color:white;"><a class="bmenu_a alarm_m" target="_blank" href="{% url 'messanger' %}" style="color:white;"><span style="color:red;">{{ count_new_messages }}</span></a></li>
+  {% else %}
+    <li class="tabik green_li" style="background-color: #6baf00;color:white;"><a class="bmenu_a alarm_m" target="_blank" href="{% url 'messanger' %}" style="color:white;"><i class="small material-icons">email</i></a></li>
+  {% endif %}

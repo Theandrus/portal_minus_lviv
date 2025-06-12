@@ -1,0 +1,11 @@
+{% load static %}
+{% for n_m in new_m %}
+	<div class="minus_item">
+
+			<a href="{% url 'minus' pk=n_m.id %}" style="color:#9ACD32;">
+				<h6 style="color:#9ACD32; margin-bottom:0px;">{{ n_m.author.name }}</h6>
+				<h6 style="color: #FFFFFF">{{ n_m.title }}</h6>
+			</a>
+
+	</div>
+{% endfor %}

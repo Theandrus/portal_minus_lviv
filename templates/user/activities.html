@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<section class="col s6">
+	<div class="row">
+		<form class="col s12">
+      		<div class="row">
+        		<div class="input-field col s12">
+          			<i class="material-icons prefix">search</i>
+          			<input id="icon_prefix" type="text" class="validate">
+          			<label for="icon_prefix">Пошук мінусовок</label>
+        		</div>
+
+      		</div>
+    	</form>
+
+
+		<div class="authors col s10 offset-s1">
+			<div class="row">
+
+
+
+
+				<h3>Останні події</h3>
+				{% for a in activities %}
+				{% if z %}
+					{% if a.type == 'c' %}
+					<a href="{% url 'minus' pk=a.activity_to %}"><p style="color:#9ACD32;font-weight: bold;">Ваш запис прокоментував користувач {{ a.from_user }}</p></a>
+
+					{% elif a.type == 'l' %}
+						<a href="{% url 'minus' pk=a.activity_to %}"><p style="color:#9ACD32;font-weight: bold;">Ваш запис вподобав користувач {{ a.from_user }}</p></a>
+
+					{% elif a.type == 'd' %}
+						<a href="{% url 'minus' pk=a.activity_to %}"><p style="color:#9ACD32;font-weight: bold;">Ваш запис не сподобався користувачу {{ a.from_user }}</p></a>
+					{% elif a.type == "s" %}
+						<li><a href="{% url 'news_index'  pk=a.activity_to %}"><span style="color:red;font-size:1.5em;font-weight:800;">!</span> Користувач {{ a.from_user.username }} прокоментував запис</a></li>
+				  
+					{% endif %}
+
+				{% else %}
+					{% if a.type == 'c' %}
+					<a href="{% url 'minus' pk=a.activity_to %}"><p style="color:#9ACD32;font-weight: bold;"> Запис прокоментував користувач {{ a.from_user }}</p></a>
+
+					{% elif a.type == 'l' %}
+						<a href="{% url 'minus' pk=a.activity_to %}"><p style="color:#9ACD32;font-weight: bold;">Запис сподобався користувачу {{ a.from_user }}</p></a>
+
+					{% elif a.type == 'd' %}
+						<a href="{% url 'minus' pk=a.activity_to %}"><p style="color:#9ACD32;font-weight: bold;">Запис не сподобався користувачу {{ a.from_user }}</p></a>
+						{% elif a.type == "s" %}
+						<li><a href="{% url 'news_index'  pk=a.activity_to %}"><span style="color:red;font-size:1.5em;font-weight:800;">!</span> Користувач {{ a.from_user.username }} прокоментував запис</a></li>
+				  
+					{% endif %}
+
+
+
+				{% endif %}
+				{% endfor %}
+				<h3>Останні повідомлення на форумі</h3>
+				{% for l_f in last_forum %}
+				<div>
+					<p style="color:#6baf00;font-weight:bold;">{{ l_f.user.username }}: </p>
+					<span>{{ l_f.body|safe }}</span><br>
+				</div>
+
+
+				{% endfor %}
+
+
+				<h3>Останні коментарі</h3>
+				{% for l_c in last_comments %}
+				<div>
+					<p style="color:#6baf00;font-weight:bold;">{{ l_c.user.username }}: </p>
+					<span>{{ l_c.comment|safe }}</span><br>
+				</div>
+
+
+				{% endfor %}
+
+
+
+
+
+
+			</div>
+		</div>
+</div>
+</section>
+
+
+{% endblock %}

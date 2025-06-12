@@ -1,0 +1,609 @@
+{% extends 'base.html' %}
+<span style="display:none;" id="content_type_id" xmlns="http://www.w3.org/1999/html">17</span>
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+<div class="minus_payment_modal hide">
+	<div class="minus_modal__wrapper ">
+
+		<svg class="minus_modal_close" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="cancelIconTitle" stroke="#ffffff" stroke-width="0.5" stroke-linecap="square" stroke-linejoin="miter" fill="none" color="#000000"> <title id="cancelIconTitle">Cancel</title> <path d="M15.5355339 15.5355339L8.46446609 8.46446609M15.5355339 8.46446609L8.46446609 15.5355339"/> <path d="M4.92893219,19.0710678 C1.02368927,15.1658249 1.02368927,8.83417511 4.92893219,4.92893219 C8.83417511,1.02368927 15.1658249,1.02368927 19.0710678,4.92893219 C22.9763107,8.83417511 22.9763107,15.1658249 19.0710678,19.0710678 C15.1658249,22.9763107 8.83417511,22.9763107 4.92893219,19.0710678 Z"/> </svg>
+
+
+<defs>
+
+
+</defs>
+
+			<g id="Layer_x0020_1">
+
+<path class="fil0" d="M262 0c72,0 138,29 185,77 48,47 77,113 77,185 0,72 -29,138 -77,185 -47,48 -113,77 -185,77 -72,0 -138,-29 -185,-77 -48,-47 -77,-113 -77,-185 0,-72 29,-138 77,-185 47,-48 113,-77 185,-77zm177 85c-45,-45 -108,-73 -177,-73 -69,0 -132,28 -177,73 -45,45 -73,108 -73,177 0,69 28,132 73,177 45,45 108,73 177,73 69,0 132,-28 177,-73 45,-45 73,-108 73,-177 0,-69 -28,-132 -73,-177z" id="Curve_x0020_767"/>
+
+				<path class="fil0" d="M208 368c2,3 2,7 0,9 -3,2 -6,2 -9,0l-110 -111c-3,-2 -3,-6 0,-8l110 -111c3,-2 6,-2 9,0 2,2 2,6 0,9l-107 106 107 106z" id="Curve_x0020_456"/>
+
+				<path class="fil0" d="M93 268c-3,0 -6,-3 -6,-6 0,-3 3,-6 6,-6l338 0c3,0 6,3 6,6 0,3 -3,6 -6,6l-338 0z" id="Curve_x0020_45"/>
+
+</g>
+
+</svg>
+
+		<div class="minus_modal_form_wrapper">
+			<h3 class="minus_modal_title">
+				Оплата за мінусівку
+			</h3>
+			<form action="#" method="POST" class="minus_modal_form">
+
+				<div class="minus_modal_form_item">
+					<label for="minus_modal_form_input_surname">Прізвище</label>
+					<input type="text" name="minus_modal_form_input_surname" id="minus_modal_form_input_surname" class="minus_modal_form_input">
+				</div>
+				<div class="minus_modal_form_item">
+					<label for="minus_modal_form_input_name">Ім'я</label>
+					<input type="text" name="minus_modal_form_input_name" id="minus_modal_form_input_name" class="minus_modal_form_input">
+				</div>
+				<div class="minus_modal_form_item">
+					<label for="minus_modal_form_input_email">Пошта</label>
+					<input type="text" name="minus_modal_form_input_email" id="minus_modal_form_input_email" class="minus_modal_form_input">
+				</div>
+				<div class="user_modal_form_item">
+					<label for="minus_modal_form_input_phone">Телефон</label>
+					<input type="tel" name="minus_modal_form_input_phone" id="minus_modal_form_input_phone" class="minus_modal_form_input">
+				</div>
+				<div class="minus_modal_form_item">
+					<label for="minus_modal_form_input_card">Карта</label>
+					<input type="number" name="minus_modal_form_input_card" placeholder="XXXX XXXX XXXX XXXX" id="minus_modal_form_input_card"
+						   class="minus_modal_form_input">
+				</div>
+
+				<div class="minus_modal_form_item minus_modal_form_item_card">
+					<div class="minus_modal_form_item_date">
+						<input type="number" placeholder="MM"  name="minus_modal_form_input_month" id="minus_modal_form_input_month" class="minus_modal_form_input"/>
+						<span>/</span>
+						<input type="number"  placeholder="YY" name="minus_modal_form_input_year" id="minus_modal_form_input_year" class="minus_modal_form_input"/>
+					</div>
+					<input type="number" placeholder="CVV"  name="minus_modal_form_input_cvv" id="minus_modal_form_input_cvv"  class="minus_modal_form_input" />
+				</div>
+				<div class="minus_modal_form_btn_box">
+					<button class="minus_modal_form_btn ">Оплатити</button>
+				</div>
+
+			</form>
+		</div>
+
+	</div>
+
+
+</div>
+
+
+<section class="minus-section col s6">
+
+	<div class="row">
+		<span id="minus_id" style="display:none;">{{ minus.id }}</span>
+		<span id="user_id" style="display:none;"> {{ request.user.id }} </span>
+		<!-- Modal -->
+		<div id="modal1" class="modal">
+			<div class="modal-content" style="text-align:center">
+				<h4>Оцiнiть якicть мiнуса</h4>
+				<a class='waves-effect waves-light btn-small quality-number'>1</a>
+				<a class='waves-effect waves-light btn-small quality-number'>2</a>
+				<a class='waves-effect waves-light btn-small quality-number'>3</a>
+				<a class='waves-effect waves-light btn-small quality-number'>4</a>
+				<a class='waves-effect waves-light btn-small quality-number'>5</a>
+				<a class='waves-effect waves-light btn-small quality-number'>6</a>
+				<a class='waves-effect waves-light btn-small quality-number'>7</a>
+				<a class='waves-effect waves-light btn-small quality-number'>8</a>
+				<a class='waves-effect waves-light btn-small quality-number'>9</a>
+				<a class='waves-effect waves-light btn-small quality-number'>10</a>
+			</div>
+			<!-- <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div> -->
+		</div>
+		<div id="modal2" class="modal">
+			<div class="modal-content" style="text-align:center">
+				<h4>Оцiнiть якiсть аранжування мiнуса</h4>
+				<a class='waves-effect waves-light btn-small arrangement-number'>1</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>2</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>3</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>4</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>5</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>6</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>7</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>8</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>9</a>
+				<a class='waves-effect waves-light btn-small arrangement-number'>10</a>
+			</div>
+			<!-- <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div> -->
+		</div>
+		<!--  end Modal -->
+		<div class="music__details-row">
+			<div class="details row">
+				<div class="author music__author">
+					<div class="c ">
+
+						<p> {{ author.name }}</p>
+					</div>
+					<div class=" name">
+						<h1  class="audiotrack__name"> {{ minus.title }}</h1>
+
+					</div>
+				</div>
+
+<!--				<div class="minus_main_btn">-->
+<!--					<div class="row">-->
+<!--						{% if user.is_staff %}<a href="{% url 'minus-update' pk=minus.id %}" class="waves-effect waves-light btn-large col s12">Редагувати</a> {% endif %}-->
+<!--						{% if user.is_authenticated %}-->
+<!--						<a class="waves-effect waves-light btn-large col s12" href="{% url 'add_moderator_message' object_pk=minus.id  content_id=17 %}">Повідомити модератора</a>-->
+<!--						{% endif %}-->
+<!--					</div>-->
+<!--				</div>-->
+
+				<div class="music__info">
+					<div class="information_about">
+						<p><b>Мінусовку завантажив:</b></p>
+<!--						<div class="avatar_mini ">-->
+<!--							<img src="/static/{% avatar pk=minus.user.pk %}"  class="circle responsive-img" alt="">-->
+<!--							&lt;!&ndash;силка на месенджер  &ndash;&gt;-->
+<!--						</div>-->
+						<p><a href="{% url 'user_page' pk=minus.user.pk %}">{{ minus_user.first_name }} {{ minus_user.last_name }}</a><br><a href="{% url 'minus' pk=minus.user.pk %}"></a></p><br>
+						<p>Всього завантажених мінусовок ({{ upload_minuses }})</p>
+					</div>
+					<div class="about_minus">
+						<div class="about_minus__item__box">
+							<div class="about_minus__item">
+								<p class="about_minus__item-characteristic">
+									Бітрейт
+								</p>
+								<p class="about_minus__item-characteristic-value">
+									{{ minus.bitrate }}
+								</p>
+							</div>
+							<div class="about_minus__item">
+								<p class="about_minus__item-characteristic">
+									Розмір
+								</p>
+								<p class="about_minus__item-characteristic-value">
+									{{ minus.filesize }} Мб
+								</p>
+							</div>
+							<div class="about_minus__item">
+								<p class="about_minus__item-characteristic">
+									Тип
+								</p>
+								<p class="about_minus__item-characteristic-value">
+									Аудіо
+								</p>
+							</div>
+						</div>
+						<div class="about_minus__item__box">
+							<div class="about_minus__item">
+								<p class="about_minus__item-characteristic">
+									Тривалість
+								</p>
+								<p class="about_minus__item-characteristic-value">
+									3:27
+								</p>
+							</div>
+							<div class="about_minus__item">
+								<p class="about_minus__item-characteristic">
+									Дата
+								</p>
+								<p class="about_minus__item-characteristic-value">
+									{{ minus.pub_date }}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col s12 minus">
+
+					<div class="custom-audio-player">
+						<div class="player-body">
+							<div class="player-controls-play">
+								<button class="player-play-btn"
+										role="button"
+										aria-label="Play"
+										data-playing="false"
+										data-audio="player-1"
+								>
+									<div class="player-icon-play">
+										<svg class="player-icon-play-icon" version="1.1"
+											 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+											 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+											 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+											 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="play-alt.svg"
+											 inkscape:version="0.48.4 r9939"
+											 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											 viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<path fill="#6baf00" id="path16995" inkscape:connector-curvature="0" d="M600,1200C268.65,1200,0,931.35,0,600C0,268.65,268.65,0,600,0
+	c331.35,0,600,268.65,600,600C1200,931.35,931.35,1200,600,1200z M450,300.45v599.1L900,600L450,300.45z"/>
+</svg>
+									</div>
+									<div class="player-icon-pause hidden">
+
+										<svg class="player-icon-pause-icon" version="1.1"
+											 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+											 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+											 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+											 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="pause-alt.svg"
+											 inkscape:version="0.48.4 r9939"
+											 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											 viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<path fill="#6baf00"  id="path15778" inkscape:connector-curvature="0" d="M600,0C268.629,0,0,268.629,0,600s268.629,600,600,600
+	s600-268.629,600-600S931.371,0,600,0z M330.835,289.38h181.714v621.24H330.835V289.38z M687.451,289.38h181.714v621.24H687.451
+	V289.38z"/>
+</svg>
+									</div>
+								</button>
+							</div>
+							<div class="player-controls">
+								<div class="player-timeline">
+									<input type="range" id="seek-bar" min="0" max="100" value="0">
+									<p class="current-time"><span id="currentTime">0:00</span>/<span id="durationTime">0:00</span></p>
+								</div>
+
+								<div class="player-volume-container">
+      <span class="icon-volume"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+									 class="bi bi-volume-down-fill" viewBox="0 0 16 16">
+  <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zm3.025 4a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
+</svg></span>
+									<input type="range" id="volume" min="0" max="1" value="1" step="0.01" class="player-volume"/>
+								</div>
+							</div>
+							<audio  id="player-1" data-type="a" src="static/{{ minus.file }}"  controlsList="nodownload"></audio>
+
+
+						</div>
+
+					</div>
+
+
+					{% if user.is_authenticated %}
+					<div class="howmany-container">
+						<div class="payment_btn_container col s1">
+							<a class="btn-small payment_btn" href="{% url 'payment_for_minus' pk=minus.id %}">Оплатити</a>
+						</div>
+						<div class="howmany col s3 offset-s2">
+							<p>Прослухано: 800</p>
+							<p>Завантажено: 153</p>
+						</div>
+					</div>
+<!--					<div class="download_btn col s1 ">-->
+<!--						<a class="  btn-small" href="/static/{{ minus.file }}">Завантажити</a>-->
+<!--					</div>-->
+
+					{% else %}
+					<p style="clear:both; margin-top: 10px"> Щоб завантажити мінусовку <a style="color: #6baf00" href="{% url 'main' %}">увійдіть</a> або <a style="color: #6baf00" href="{% url 'registration_page' %}">зареєструйтесь</a></p>
+					<div class="howmany col s3">
+						<p>Прослухано:0</p>
+						<p>Завантажено: 0</p>
+					</div>
+					{% endif %}
+
+
+				</div>
+				<div class="col s12 social_btn">
+					{% if request.user.is_authenticated %}
+					<a class="social_btn_item like" id="{{ minus.id }}"><i class="material-icons ">mood</i><span>
+						{{ likes }} </span><span style="display:none;" id="userl">{{ request.user.pk }}</span></a>
+					<a class="social_btn_item dislike" id="{{ minus.id }}"><i class="material-icons ">mood_bad</i><span>
+				{{ dislikes }}</span></a>
+
+					{% else %}
+					<a class="social_btn_item like"><i class="material-icons ">mood</i><span>
+				{{ likes }} </span><span style="display:none;" id="userl">{{ request.user.pk }}</span></a>
+					<a class="social_btn_item dislike" ><i class="material-icons ">mood_bad</i><span>
+				{{ dislikes }} </span></a>
+					{% endif %}
+					<a class="social_btn_item modal-trigger" href="#modal1" id="quality">Якість запису: <span>{{ minus.quality_assessment }}</span></a>
+					<a class="social_btn_item modal-trigger" href="#modal2" id="arrangement">Аранжування: <span>{{ minus.arrangement_assessment }}</span></a>
+
+					<a class="social_btn_item  ">Загальний рейтинг: <span>{{ minus.all_rate }}</span></a>
+					<script src="{% static 'js/minusstore/ratings.js' %}"></script>
+				</div>
+				<div class="col s12 user_which_upload">
+					<div class="row">
+						<div class="col s11  more_about_minus_from_uploader">
+							<p>{{  minus.annotation }} </p>
+						</div>
+
+
+					</div>
+				</div>
+
+
+				<div class="col s12 more_about">
+					<div class="row">
+						<div class="col s12 main_more_about_p ">
+							<p>Додаткові дані:
+							</p>
+						</div>
+						<div class="col  left"><p>Автор аранжування<span></p></div>
+						<div class="col  line">_____</div>
+						<div class="col "><p>{{ minus.arrangeuathor }}</p></div><div class="col s12"></div>
+						<div class="col  left"><p>Вид каталогу</p></div>
+						<div class="col  line">_____</div>
+						<div class="col "><p>{{ minus.category }}</p></div><div class="col s12"></div>
+						<div class="col  left"><p>Вид за призначенням</p></div>
+						<div class="col  line">_____</div>
+						<div class="col "><p>{{ minus.minus_appointment }}</p></div><div class="col s12"></div>
+						<div class="col  left"><p>Належить до жанру</p></div>
+						<div class="col  line">_____</div>
+						<div class="col "><p>{{ minus.minus_genre }}</p></div><div class="col s12"></div>
+
+
+					</div>
+				</div>
+				{% if minus.plusrecord %}
+				<div class="col s6 plus">
+					<p>Плюсовий запис</p>
+					<div class="custom-audio-player">
+						<div class="player-body">
+							<div class="player-controls-play">
+								<button class="player-play-btn"
+										role="button"
+										aria-label="Play"
+										data-playing="false"
+										data-audio="player-1"
+								>
+									<div class="player-icon-play">
+										<svg class="player-icon-play-icon" version="1.1"
+											 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+											 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+											 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+											 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="play-alt.svg"
+											 inkscape:version="0.48.4 r9939"
+											 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											 viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<path fill="#6baf00" id="path16995" inkscape:connector-curvature="0" d="M600,1200C268.65,1200,0,931.35,0,600C0,268.65,268.65,0,600,0
+	c331.35,0,600,268.65,600,600C1200,931.35,931.35,1200,600,1200z M450,300.45v599.1L900,600L450,300.45z"/>
+</svg>
+									</div>
+									<div class="player-icon-pause hidden">
+
+										<svg class="player-icon-pause-icon" version="1.1"
+											 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+											 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+											 xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+											 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="pause-alt.svg"
+											 inkscape:version="0.48.4 r9939"
+											 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											 viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<path fill="#6baf00"  id="path15778" inkscape:connector-curvature="0" d="M600,0C268.629,0,0,268.629,0,600s268.629,600,600,600
+	s600-268.629,600-600S931.371,0,600,0z M330.835,289.38h181.714v621.24H330.835V289.38z M687.451,289.38h181.714v621.24H687.451
+	V289.38z"/>
+</svg>
+									</div>
+								</button>
+							</div>
+							<div class="player-controls">
+								<div class="player-timeline">
+									<input type="range" id="seek-bar" min="0" max="100" value="0">
+								</div>
+								<div class="player-volume-container">
+      <span class="icon-volume"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+									 class="bi bi-volume-down-fill" viewBox="0 0 16 16">
+  <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zm3.025 4a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
+</svg></span>
+									<input type="range" id="volume" min="0" max="1" value="1" step="0.01" class="player-volume"/>
+								</div>
+							</div>
+							<audio   src="/static/{{ minus.plusrecord.file }}"  controlsList="nodownload"></audio>
+						</div>
+
+					</div>
+
+				</div>
+				{% endif %}
+				<div class="col s5 offset-s1 social_network">
+					<div class="row share">
+						<p>Поділитись:</p>
+						<div class="share__link-row">
+							<a class="waves-effect waves-light btn-large col s3"><img src="{% static 'img/facebook.png' %}"/></a>
+							<a class="waves-effect waves-light btn-large col s3"><img src="{% static 'img/instagram.png' %}"/></a>
+							<a class="waves-effect waves-light btn-large col s3"><img src="{% static 'img/twitter.png' %}"/></a>
+
+						</div>
+
+					</div>
+				</div>
+				{% if minus.lyrics %}
+				<div class="col s12 text_of_track">
+					<p>Текст пісні</p>
+					<a class="waves-effect waves-light btn-large" href="{% url 'generete_pdf' pk=minus.id %}"><i class="material-icons left">cloud_download</i>Завантажити текст</a>
+					<p class="col s12 m5 s12">{{ minus.lyrics }}</p>
+				</div>
+				{% endif %}
+				<div class="col s12 video">
+					<iframe class="music__video"  src="https://www.youtube.com/embed/082v4qv7lAA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+
+		<div class="col s12 comments_in_minusstore">
+			<p>Коментарі({{ count }}):</p>
+			{% load my_tags %}
+			{% for comment in comments %}
+
+			<div class="comment__item">
+				<div class="comment__content">
+					<div class="comment_user_info">
+						<a class="comment__avatar-box" href="{% url 'user_page' pk=comment.user.pk %}">
+							<img src="/static/{% avatar pk=comment.user.pk %}"
+								 alt="avatar" class="comment__avatar">
+						</a>
+						<a href="{% url 'user_page' pk=comment.user.pk%}" class="comment__user-name">
+							{% if comment.user.first_name %} {{ comment.user.first_name }} {{ comment.user.last_name }}{% else %}{{ comment.user.username }}{% endif %}
+							{% if comment.is_edited == 1 %}
+							<span class="comment__controller-edit-status">Відредаговано!</span>
+							{% else %}
+							<span class="comment__controller-edit-status"></span>
+							{% endif %}
+						</a>
+					</div>
+
+					<div class="comment__info">
+						<p class="comment__info-date">
+							{{ comment.submit_date }}
+						</p>
+						<p class="comment__info-rating">
+							Рейтинг +1
+						</p>
+						<div class="comment__info-reactions">
+
+							{% if user.is_authenticated %}
+							<a class="comment__info-like comment__info-reaction" >
+{#								<form action="{% url 'interact_with_comment' comment.id 'like' %}" method="post">#}
+{#									{% csrf_token %}#}
+									<button type="submit" style= "width:40px; height:40px;">
+										<svg class="comment__info-like-icon comment__info-reaction" viewBox="0 0 24 24" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<g clip-path="url(#clip0_15_121)">
+												<rect width="24" height="24" fill="white"/>
+												<path d="M3 12.5C3 11.3954 3.89543 10.5 5 10.5H6C7.10457 10.5 8 11.3954 8 12.5V18.5C8 19.6046 7.10457 20.5 6 20.5H5C3.89543 20.5 3 19.6046 3 18.5V12.5Z"
+													  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M8 12.5C9 12.5 13 10 13 5C13 3 16 3 16 5C16 7 16 8 15 10.5H21C21.5523 10.5 22 10.9477 22 11.5V14.7396C22 15.2294 21.8202 15.7022 21.4948 16.0683L18.5967 19.3287C18.2172 19.7557 17.6731 20 17.1019 20H10.3333C10.117 20 9.90643 19.9298 9.73333 19.8L8 18.5"
+													  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+											</g>
+											<defs>
+												<clipPath id="clip0_15_121">
+													<rect width="24" height="24" fill="white"/>
+												</clipPath>
+											</defs>
+										</svg>
+									</button>
+									<span>
+                                            {{ comment.like.count }}
+                                             </span>
+{#								</form>#}
+							</a>
+							<a class="comment__info-dislike" >
+{#								<form action="{% url 'interact_with_comment' comment.id 'dislike' %}" method="post">#}
+{#									{% csrf_token %}#}
+									<button type="submit" style= "width:40px; height:40px;">
+										<svg class="comment__info-dislike-icon comment__info-reaction" viewBox="0 0 24 24" fill="none"
+											 xmlns="http://www.w3.org/2000/svg">
+											<g clip-path="url(#clip0_15_129)">
+												<rect width="24" height="24" fill="white"/>
+												<path d="M22 11.5C22 12.6046 21.1046 13.5 20 13.5L19 13.5C17.8954 13.5 17 12.6046 17 11.5L17 5.5C17 4.39543 17.8954 3.5 19 3.5L20 3.5C21.1046 3.5 22 4.39543 22 5.5L22 11.5Z"
+													  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+												<path d="M17 11.5C16 11.5 12 14 12 19C12 21 9 21 9 19C9 17 9 16 10 13.5L4 13.5C3.44772 13.5 3 13.0523 3 12.5L3 9.26039C3 8.77056 3.17976 8.29776 3.50518 7.93166L6.40331 4.67126C6.78285 4.24428 7.32686 3.99998 7.89813 3.99998L14.6667 3.99998C14.883 3.99998 15.0936 4.07016 15.2667 4.19998L17 5.49998"
+													  stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+											</g>
+											<defs>
+												<clipPath id="clip0_15_129">
+													<rect width="24" height="24" fill="white"/>
+												</clipPath>
+											</defs>
+										</svg>
+									</button>
+									{#										<span>{{ comment.dislikes.count }}</span>#}
+{#								</form>#}
+							</a>
+							{% else %}
+
+							{% endif %}
+						</div>
+
+					</div>
+					<form action="{% url 'edit_comment' comment.id %}" method="post" class="comment__controller__form">
+						{% csrf_token %}
+						<p class="comment">
+							{{ comment.comment }}
+						</p>
+						<textarea name="comment" type="text" class="comment__edit comment__hide" id="comment">
+
+                              </textarea>
+
+                        {% if user.is_authenticated %}
+						<div class="comment__controller">
+							<a class="comment__controller-reply" comment_id="{{ comment.id }}"  username="{{ comment.user.username }}" >Відповісти</a>
+							<div class="comment__controller-edit_box">
+								<div class="comment__controller-cancel-edit comment__hide">
+									Скасувати
+								</div>
+								{% if comment.user.id == user.id %}
+								<p class="comment__controller-edit" >
+									Редагувати
+								</p>
+								{% else %}
+								<p class="comment__controller-edit" ></p>
+								{% endif %}
+								<button type="submit" class="comment__controller-save comment__hide" >
+									Зберегти
+								</button>
+							</div>
+
+						</div>
+                        {% endif %}
+					</form>
+
+
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'add_answer_to_comment' comment.id %}" method="post" class="comment__form__reply comment__hide">
+                            {% csrf_token %}
+                            <textarea name="comment" type="text" class="comment__reply_area-text">
+
+                                  </textarea>
+                            <div class="comment__form__reply__controller">
+                                <div class="comment__reply_cancel-btn">
+                                    Скасувати
+                                </div>
+                                <button class="comment__reply_save-btn" type="submit">Відправити</button>
+
+                            </div>
+
+                        </form>
+                    {% endif %}
+
+					{% if comment.replies %}
+					{% for a in comment.replies %}
+					<hr />
+					<div class="comment col s10 offset-s2">
+						<div class="avatar_mini col s2">
+							<a href="{% url 'user_page' pk=a.user.pk%}">
+								<img src="/static/{% avatar pk=a.user.pk %}"  class="responsive-img" alt="">
+							</a>
+						</div>
+						<p style="font-weight: bold;"><a href="{% url 'user_page' pk=a.user.pk%}" style="color:#6baf00;">{% if a.user.first_name %} {{ a.user.first_name }} {{ a.user.last_name }}{% else %}{{ a.user.username }}{% endif %}</a></p>
+						<p style="font-size:1em;">{{ a.comment }}</p>
+					</div>
+					{% endfor %}
+					{% endif %}
+				</div>
+
+			</div>
+			{% endfor %}
+			{% if user.is_authenticated %}
+			<div class="add_comment">
+				<form  action="{% url 'add_comment_to_minus' pk=minus.pk%}" method="post">
+					{% csrf_token %}
+					<input type="text" name="comment"/>
+					<button type="submit" id="comment_form" class="waves-effect waves-light btn-small">
+						Відправити
+					</button>
+
+					<label>
+						<input type="checkbox" name="subscribe" />
+						<span>Підписатись на коментарі до цього мiнуса</span>
+					</label>
+
+				</form>
+
+			</div>
+
+			{% endif %}
+		</div>
+	</div>
+
+
+
+	<script src="/static/js/commentsEdit.js"></script>
+</section>
+<script src="/static/js/minusPaymentModal.js"></script>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% load static %}
+{% for l_m_f_u in last_minuses_for_user %}
+		<div class="minus_item">
+
+			<a href="{% url 'minus' pk=l_m_f_u.id %}" >
+				<h6 style="color:#9ACD32; margin-bottom:0px;">{{ l_m_f_u.author.name }}</h6>
+				<h6 style="color:#FFFFFF;">{{ l_m_f_u.title }}</h6>
+			</a>
+
+		</div>
+
+{% endfor %}
